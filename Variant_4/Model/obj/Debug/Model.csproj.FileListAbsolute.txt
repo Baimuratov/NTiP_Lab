@@ -1,0 +1,15 @@
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\ClassLibrary1\ClassLibrary1\bin\Debug\ClassLibrary1.dll
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\ClassLibrary1\ClassLibrary1\bin\Debug\ClassLibrary1.pdb
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\ClassLibrary1\ClassLibrary1\obj\Debug\Model.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\ClassLibrary1\ClassLibrary1\obj\Debug\ClassLibrary1.dll
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\ClassLibrary1\ClassLibrary1\obj\Debug\ClassLibrary1.pdb
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\Model\bin\Debug\ClassLibrary1.dll
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\Model\bin\Debug\ClassLibrary1.pdb
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\Model\obj\Debug\ClassLibrary1.dll
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\Model\obj\Debug\ClassLibrary1.pdb
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\Model\bin\Debug\ClassLibrary1.dll
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\Model\bin\Debug\ClassLibrary1.pdb
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\Model\obj\Debug\ClassLibrary1.dll
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\Model\obj\Debug\ClassLibrary1.pdb

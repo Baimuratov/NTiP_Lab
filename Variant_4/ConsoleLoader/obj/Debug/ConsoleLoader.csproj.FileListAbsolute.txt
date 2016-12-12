@@ -1,0 +1,16 @@
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\ClassLibrary1\ConsoleLoader\bin\Debug\ConsoleLoader.exe.config
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\ClassLibrary1\ConsoleLoader\bin\Debug\ConsoleLoader.exe
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\ClassLibrary1\ConsoleLoader\bin\Debug\ConsoleLoader.pdb
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\ClassLibrary1\ConsoleLoader\bin\Debug\ClassLibrary1.dll
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\ClassLibrary1\ConsoleLoader\bin\Debug\ClassLibrary1.pdb
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\ClassLibrary1\ConsoleLoader\obj\Debug\ConsoleLoader.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\ClassLibrary1\ConsoleLoader\obj\Debug\ConsoleLoader.exe
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\ClassLibrary1\ConsoleLoader\obj\Debug\ConsoleLoader.pdb
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\ConsoleLoader\bin\Debug\ConsoleLoader.exe.config
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\ConsoleLoader\obj\Debug\ConsoleLoader.exe
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\ConsoleLoader\bin\Debug\ConsoleLoader.exe
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\ConsoleLoader\bin\Debug\ConsoleLoader.pdb
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\ConsoleLoader\bin\Debug\ClassLibrary1.dll
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\ConsoleLoader\bin\Debug\ClassLibrary1.pdb
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\ConsoleLoader\obj\Debug\ConsoleLoader.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\ConsoleLoader\obj\Debug\ConsoleLoader.pdb
