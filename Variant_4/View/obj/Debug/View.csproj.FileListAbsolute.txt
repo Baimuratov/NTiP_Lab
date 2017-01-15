@@ -11,7 +11,6 @@ C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\View\bin\Debug\Cl
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\View\obj\Debug\View.MainForm.resources
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\View\obj\Debug\View.AddTransportForm.resources
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\View\obj\Debug\View.SearchTransportForm.resources
-C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\bin\Debug\View.exe.config
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\obj\Debug\View.exe
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\obj\Debug\View.pdb
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\bin\Debug\View.exe

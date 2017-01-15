@@ -16,18 +16,26 @@ namespace Model
         /// Время полёта в часах
         /// </summary>
         private double _hoursInAir;
-        
+
         /// <summary>
         /// Возвращает или задаёт время полёта в часах
         /// </summary>
-        /// <exception cref="System.ArgumentException"></exception>
+        /// <exception cref="ArgumentException"></exception>
         public double HoursInAir
         {
             set
             {
                 if (value < 0)
                 {
-                    throw new System.ArgumentException("Значение не может быть отрицательным");
+                    throw new ArgumentException("Значение не может быть отрицательным");
+                }
+                if (double.IsNaN(value))
+                {
+                    throw new ArgumentException("Значение не может быть 'Not a number'");
+                }
+                if (double.IsInfinity(value))
+                {
+                    throw new ArgumentException("Значение не может быть бесконечностью");
                 }
                 else
                 {

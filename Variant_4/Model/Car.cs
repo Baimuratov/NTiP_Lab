@@ -20,14 +20,22 @@ namespace Model
         /// <summary>
         /// Возвращает или задаёт пройденный путь в км
         /// </summary>
-        /// <exception cref="System.ArgumentException"></exception>
+        /// <exception cref="ArgumentException"></exception>
         public double DroveKilometers
         {
             set
             {
                 if (value < 0)
                 {
-                    throw new System.ArgumentException("Значение не может быть отрицательным");
+                    throw new ArgumentException("Значение не может быть отрицательным");
+                }
+                if (double.IsNaN(value))
+                {
+                    throw new ArgumentException("Значение не может быть 'Not a number'");
+                }
+                if (double.IsInfinity(value))
+                {
+                    throw new ArgumentException("Значение не может быть бесконечностью");
                 }
                 else
                 {
