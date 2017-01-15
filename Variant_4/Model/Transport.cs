@@ -12,19 +12,30 @@ namespace Model
     [Serializable]
     abstract public class Transport : ITransport
     {
+        /// <summary>
+        /// Удельный расход топлива. Единица измерения зависит от вида транспорта
+        /// </summary>
         private double _specificFC;
-        
+
         /// <summary>
         /// Возвращает или задаёт удельный расход топлива. Единица измерения зависит от вида транспорта
         /// </summary>
-        /// <exception cref="System.ArgumentException"></exception>
+        /// <exception cref="ArgumentException"></exception>
         public double SpecificFuelConsumption
         {
             set
             {
                 if (value < 0)
                 {
-                    throw new System.ArgumentException("Значение не может быть отрицательным");
+                    throw new ArgumentException("Значение не может быть отрицательным");
+                }
+                if (double.IsNaN(value))
+                {
+                    throw new ArgumentException("Значение не может быть 'Not a number'");
+                }
+                if (double.IsInfinity(value))
+                {
+                    throw new ArgumentException("Значение не может быть бесконечностью");
                 }
                 else
                 {

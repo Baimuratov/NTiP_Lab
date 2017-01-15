@@ -1,0 +1,9 @@
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\UnitTests\bin\Debug\UnitTests.dll
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\UnitTests\bin\Debug\UnitTests.pdb
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\UnitTests\bin\Debug\ClassLibrary1.dll
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\UnitTests\bin\Debug\nunit.framework.dll
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\UnitTests\bin\Debug\ClassLibrary1.pdb
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\UnitTests\obj\Debug\UnitTests.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\UnitTests\obj\Debug\UnitTests.dll
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\UnitTests\obj\Debug\UnitTests.pdb
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\UnitTests\bin\Debug\nunit.framework.xml

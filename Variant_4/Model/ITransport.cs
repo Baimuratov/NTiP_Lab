@@ -14,7 +14,7 @@ namespace Model
         /// <summary>
         /// Возвращает или задаёт удельный расход топлива. Единица измерения зависит от вида транспорта
         /// </summary>
-        /// <exception cref="System.ArgumentException"></exception>
+        /// <exception cref="ArgumentException"></exception>
         double SpecificFuelConsumption { set; get; }
         
         /// <summary>

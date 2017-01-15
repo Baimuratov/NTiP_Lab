@@ -96,9 +96,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{c5d6dabf-b94d-4e02-bba1-21a0adaa623c}</Project>
       <Name>Model</Name>
