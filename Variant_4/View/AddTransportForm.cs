@@ -17,12 +17,14 @@ namespace View
     /// Форма добавления объекта реализующего интерфейс ITransport
     /// в список TransportList главной формы
     /// </summary>
-    public partial class AddTransportForm : ValidationForm
+    public partial class AddTransportForm : Form
     {
         /// <summary>
         /// Форма, содержащая список в который добавляется объект реализующий ITransport
         /// </summary>
         private MainForm _parent;
+
+        private Validation _validation;
 
         /// <summary>
         /// Инициализирует новый экземпляр класса View.AddTransportForm
@@ -32,6 +34,7 @@ namespace View
         {
             InitializeComponent();
             _parent = parentForm;
+            _validation = new Validation();
             #if !DEBUG
             _randomDataButton.Visible = false;
             #endif
@@ -86,7 +89,7 @@ namespace View
             {
                 // выполнить фильтрацию текста, оставив только символы
                 // представляющие натуральное или дробное число
-                ValidateText(ref _specificFuelConsumptionTextBox);
+                _validation.ValidateText(ref _specificFuelConsumptionTextBox);
             }
         }
 
@@ -100,7 +103,7 @@ namespace View
         {
             if (_droveKilometersTextBox.Modified)
             {
-                ValidateText(ref _droveKilometersTextBox);
+                _validation.ValidateText(ref _droveKilometersTextBox);
             }
         }
 
@@ -114,7 +117,7 @@ namespace View
         {
             if (_hoursInAirTextBox.Modified)
             {
-                ValidateText(ref _hoursInAirTextBox);
+                _validation.ValidateText(ref _hoursInAirTextBox);
             }
         }
 

@@ -64,6 +64,13 @@
     <Compile Include="SearchTransportForm.Designer.cs">
       <DependentUpon>SearchTransportForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TransportControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TransportControl.Designer.cs">
+      <DependentUpon>TransportControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Validation.cs" />
     <Compile Include="ValidationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +91,9 @@
     </Compile>
     <EmbeddedResource Include="SearchTransportForm.resx">
       <DependentUpon>SearchTransportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TransportControl.resx">
+      <DependentUpon>TransportControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

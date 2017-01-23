@@ -23,3 +23,4 @@ C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\obj
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\obj\Debug\View.Properties.Resources.resources
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\obj\Debug\View.SearchTransportForm.resources
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\obj\Debug\View.csproj.GenerateResource.Cache
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\obj\Debug\View.TransportControl.resources

@@ -28,7 +28,7 @@ namespace UnitTests.Model
         [TestCase(double.MinValue, ExpectedException = typeof(ArgumentException), TestName = "Тестирование DroveKilometers при присваивании минимально допустимого вещественного числа")]
         [TestCase(double.NaN, ExpectedException = typeof(ArgumentException), TestName = "Тестирование DroveKilometers при присваивании 'Note a number'")]
         [TestCase(double.PositiveInfinity, ExpectedException = typeof(ArgumentException), TestName = "Тестирование DroveKilometers при присваивании положительного бесконечного значения")]
-        [TestCase(double.NegativeInfinity, ExpectedException = typeof(ArgumentException), TestName = "Тестирование DroveKilometers при присваивании отрицатльного бесконечного значения")]
+        [TestCase(double.NegativeInfinity, ExpectedException = typeof(ArgumentException), TestName = "Тестирование DroveKilometers при присваивании отрицательного бесконечного значения")]
         public void DroveKilometersTest(double droveKilometers)
         {
             var car = new Car();
