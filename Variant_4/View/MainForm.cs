@@ -92,6 +92,8 @@ namespace View
 
             _formatter = new BinaryFormatter();
             _file = null;
+
+            transportControl1.ReadOnly = true;
         }
 
         /// <summary>
@@ -101,7 +103,7 @@ namespace View
         /// <param name="e"></param>
         private void addButton_Click(object sender, EventArgs e)
         {
-            AddTransportForm addingForm = new AddTransportForm(this);
+            EditTransportForm addingForm = new EditTransportForm(this, TransportList.Count);
             addingForm.ShowDialog();
             _bindingTransportList.ResetBindings(true);
         }
@@ -290,6 +292,7 @@ namespace View
 
             TransportList.RemoveAll(transport => true);
             _bindingTransportList.ResetBindings(true);
+            transportControl1.Object = null;
 
             if (_documentStatus == DocumentStatus.None)
             {
@@ -396,9 +399,11 @@ namespace View
             }
             TransportList.RemoveAll(transport => true);
             _bindingTransportList.ResetBindings(true);
+            transportControl1.Object = null;
 
             _transportListGridView.Enabled = false;
             _addButton.Enabled = false;
+            _modifyButton.Enabled = false;
             _removeButton.Enabled = false;
             _searchButton.Enabled = false;
             _saveToolStripMenuItem.Enabled = false;
@@ -417,6 +422,7 @@ namespace View
         {
             _transportListGridView.Enabled = true;
             _addButton.Enabled = true;
+            _modifyButton.Enabled = true;
             _removeButton.Enabled = true;
             _searchButton.Enabled = true;
             _saveToolStripMenuItem.Enabled = true;
@@ -435,6 +441,28 @@ namespace View
             if (!DiscontinueCurrentDocument())
             {
                 e.Cancel = true;
+            }
+        }
+
+        private void _modifyButton_Click(object sender, EventArgs e)
+        {
+            if (_transportListGridView.CurrentCell != null)
+            {
+                EditTransportForm modifyForm = new EditTransportForm(this, _transportListGridView.CurrentCell.RowIndex);
+                modifyForm.ShowDialog();
+                _bindingTransportList.ResetBindings(true);
+            }
+        }
+
+        private void _transportListGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            if (_transportListGridView.CurrentCell == null)
+            {
+                transportControl1.Object = null;
+            }
+            else
+            {
+                transportControl1.Object = (Transport)TransportList[_transportListGridView.CurrentCell.RowIndex];
             }
         }
     }

@@ -3,3 +3,8 @@ C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\Model\bin\Release
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\Model\obj\Release\ClassLibrary1.dll
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\Model\obj\Release\ClassLibrary1.pdb
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\Model\obj\Release\Model.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\Model\bin\Release\ClassLibrary1.dll
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\Model\bin\Release\ClassLibrary1.pdb
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\Model\obj\Release\Model.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\Model\obj\Release\ClassLibrary1.dll
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\Model\obj\Release\ClassLibrary1.pdb
