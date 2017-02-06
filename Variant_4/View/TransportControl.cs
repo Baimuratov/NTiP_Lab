@@ -11,11 +11,26 @@ using Model;
 
 namespace View
 {
+    /// <summary>
+    /// Элемент управления отражающий свойства объекта типа Transport
+    /// </summary>
     public partial class TransportControl : UserControl
     {
-        private Validation _validation;
+        /// <summary>
+        /// Инкапсулирует метод, оставляющий в тексте только те символы, которые представляют вещественное число
+        /// </summary>
+        private DoubleFilter _filter;
+        
+        /// <summary>
+        /// Режим доступа к данным в текстовых полях: 
+        /// true - только для чтения, false - разрешено редактирование
+        /// </summary>
         private bool _readOnly;
-
+        
+        /// <summary>
+        /// Возвращает или задаёт объект, чьи свойства отражает элемент управления. 
+        /// Если текстовые поля содержат некорректные данные, то возвращается null
+        /// </summary>
         public Transport Object
         {
             set
@@ -25,6 +40,7 @@ namespace View
                     _droveKilometersTextBox.Text = string.Empty;
                     _hoursInAirTextBox.Text = string.Empty;
                     _specificFuelConsumptionTextBox.Text = string.Empty;
+                    // Car - тип по умолчанию
                     _carRadioButton.Checked = true;  
                 }
                 else
@@ -46,18 +62,21 @@ namespace View
             }
             get
             {
+                // При использовании данного элемента управления в конструкторе форм
+                // метод доступа get вызывается автоматически.
+                // Он выполняет проверку данных в текстовых полях с выводом сообщений об ошибках.
+                // Чтобы эти сообщения не появлялись при работе в конструкторе форм,
+                // проверка достижима только если выполняется данный проект
                 if (Application.ProductName != "View")
                 {
                     return null;
                 }
-                /*if ((_carRadioButton.Checked || _helicopterRadioButton.Checked) == false)
-                {
-                    return null;
-                }*/
                 Transport transport;
                 if (_carRadioButton.Checked)
                 {
                     Car auto = new Car();
+                    // Попытка записать в свойство данные из текстового поля.
+                    // При неправильных данных метод WriteProperty выведет окно с описанием ошибки
                     if (!WriteProperty(_droveKilometersTextBox.Text, "Drove kilometers", value => auto.DroveKilometers = value))
                     {
                         return null;
@@ -77,13 +96,26 @@ namespace View
                 {
                     return null;
                 }
-                else
+                // Проверка значения свойства FuelConsumption,
+                // которое не задаётся непосредственно, а
+                // вычисляется на основе записанных свойств
+                try
                 {
-                    return transport;
+                    double test = transport.FuelConsumption;
                 }
+                catch (OverflowException)
+                {
+                    MessageBox.Show("The entered property values is incorrect because of overflow when calculating the fuel consumption");
+                    return null;
+                }
+                return transport;
             }
         }
 
+        /// <summary>
+        /// Возвращает или задаёт режим доступа к данным в текстовых полях: 
+        /// true - только для чтения, false - разрешено редактирование
+        /// </summary>
         public bool ReadOnly
         {
             set
@@ -116,10 +148,13 @@ namespace View
             }
         }
 
+        /// <summary>
+        /// Инициализирует новый экземпляр класса View.TransportControl
+        /// </summary>
         public TransportControl()
         {
             InitializeComponent();
-            _validation = new Validation();
+            _filter = new DoubleFilter();
             #if !DEBUG
             _randomDataButton.Visible = false;
             #endif
@@ -133,13 +168,15 @@ namespace View
         /// <param name="e"></param>
         private void _specificFuelConsumptionTextBox_TextChanged(object sender, EventArgs e)
         {
-            // если текстовое поле изменено пользователем
+            // Если текстовое поле изменено пользователем
             if (_specificFuelConsumptionTextBox.Modified)
             {
                 // выполнить фильтрацию текста, оставив только символы
                 // представляющие натуральное или дробное число
-                _validation.ValidateText(ref _specificFuelConsumptionTextBox);
+                _filter.FilterText(ref _specificFuelConsumptionTextBox); 
             }
+            // Отобразить FuelConsumption рассчитаное по новому значению свойства
+            //CalculateFuelConsumption();
         }
 
         /// <summary>
@@ -152,8 +189,9 @@ namespace View
         {
             if (_droveKilometersTextBox.Modified)
             {
-                _validation.ValidateText(ref _droveKilometersTextBox);
+                _filter.FilterText(ref _droveKilometersTextBox);
             }
+            //CalculateFuelConsumption();
         }
 
         /// <summary>
@@ -166,8 +204,9 @@ namespace View
         {
             if (_hoursInAirTextBox.Modified)
             {
-                _validation.ValidateText(ref _hoursInAirTextBox);
+                _filter.FilterText(ref _hoursInAirTextBox);
             }
+            //CalculateFuelConsumption();
         }
 
         /// <summary>
@@ -190,6 +229,7 @@ namespace View
                     _droveKilometersTextBox.Text = string.Empty;
                 }
             }
+            CalculateFuelConsumption();
         }
 
         /// <summary>
@@ -212,6 +252,7 @@ namespace View
                     _hoursInAirTextBox.Text = string.Empty;
                 }
             }
+            CalculateFuelConsumption();
         }
 
         /// <summary>
@@ -240,6 +281,11 @@ namespace View
             }
         }
 
+        /// <summary>
+        /// Генерирует в текстовых полях случайные допустимые данные
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void _randomDataButton_Click(object sender, EventArgs e)
         {
             Random randomData = new Random();
@@ -251,6 +297,48 @@ namespace View
             else
             {
                 _hoursInAirTextBox.Text = Convert.ToString(randomData.NextDouble() * 10);
+            }
+        }
+
+
+        /// <summary>
+        /// Отображает в текстовом поле значение свойства FuelConsumption, 
+        /// которое доступно только для чтения и 
+        /// вычисляется на основе свойств задаваемых в данном элементе управления
+        /// </summary>
+        private void CalculateFuelConsumption()
+        {
+            Transport transport;
+            try
+            {
+                if (_carRadioButton.Checked)
+                {
+                    Car auto = new Car();
+                    auto.DroveKilometers = Convert.ToDouble(_droveKilometersTextBox.Text);
+                    transport = auto;
+                }
+                else
+                {
+                    Helicopter heli = new Helicopter();
+                    heli.HoursInAir = Convert.ToDouble(_hoursInAirTextBox.Text);
+                    transport = heli;
+                }
+                transport.SpecificFuelConsumption = Convert.ToDouble(_specificFuelConsumptionTextBox.Text);
+            }
+            catch (Exception)
+            {
+                // Содержащиеся в текстовых полях значения свойств некорректны,
+                // FuelConsumption вычислить по ним невозможно
+                _fuelConsumptionTextBox.Text = string.Empty;
+                return;
+            }
+            try
+            {
+                _fuelConsumptionTextBox.Text = transport.FuelConsumption.ToString();
+            }
+            catch (OverflowException)
+            {
+                _fuelConsumptionTextBox.Text = "overflow";
             }
         }
     }

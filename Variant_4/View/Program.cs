@@ -13,11 +13,19 @@ namespace View
         /// Главная точка входа для приложения.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            switch (args.Length)
+            {
+                case 0:
+                    Application.Run(new MainForm(string.Empty));
+                    break;
+                case 1:
+                    Application.Run(new MainForm(args[0]));
+                    break;
+            }
         }
     }
 }

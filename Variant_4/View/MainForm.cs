@@ -62,7 +62,27 @@ namespace View
         /// <summary>
         /// Показывает был ли изменён документ с момента создания, открытия или сохранения
         /// </summary>
-        public bool DocumentChanged;
+        private bool _documentChanged;
+
+        /// <summary>
+        /// Возвращает или задаёт признак изменённости документа
+        /// </summary>
+        public bool DocumentChanged
+        {
+            set
+            {
+                _documentChanged = value;
+                if (value == true)
+                {
+                    // Добавление в заголовок окна, символа, показывающего что документ был изменён
+                    Text = Regex.Replace(Text, @".\z", match => match.Value == "*" ? match.Value : match.Value + "*");
+                }
+            }
+            get
+            {
+                return _documentChanged;
+            }
+        }
 
         /// <summary>
         /// Используется при сериализации или десериализации списка TransportList
@@ -77,7 +97,7 @@ namespace View
         /// <summary>
         /// Инициализирует новый экземпляр класса View.MainForm
         /// </summary>
-        public MainForm()
+        public MainForm(string fileName)
         {
             InitializeComponent();
 
@@ -86,14 +106,19 @@ namespace View
             _transportListGridView.DataSource = _bindingTransportList;
 
             _documentStatus = DocumentStatus.New;
+            Text += " - New list1";
             _newDocumentIndex = 1;
             DocumentChanged = false;
-            Text += " - New list1";
 
             _formatter = new BinaryFormatter();
             _file = null;
 
             transportControl1.ReadOnly = true;
+
+            if (fileName != string.Empty)
+            {
+                LoadDocument(fileName);
+            }
         }
 
         /// <summary>
@@ -164,8 +189,6 @@ namespace View
             if (remoteObjectsCount > 0)
             {
                 DocumentChanged = true;
-                // Добавление в заголовок окна, символа, показывающего что документ был изменён
-                Text = Regex.Replace(Text, @".\z", match => match.Value == "*" ? match.Value : match.Value + "*");
             }
         }
 
@@ -189,9 +212,9 @@ namespace View
         /// <param name="e"></param>
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (DiscontinueCurrentDocument())
+            if (DiscontinueCurrentDocument() && openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                LoadDocument();
+                LoadDocument(openFileDialog.FileName);
             }
         }
 
@@ -307,43 +330,40 @@ namespace View
         /// <summary>
         /// Загружает документ из существующего файла
         /// </summary>
-        private void LoadDocument()
+        private void LoadDocument(string fileName)
         {
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            FileStream tempFile;
+            List<ITransport> tempList;
+            try
             {
-                FileStream tempFile;
-                List<ITransport> tempList;
-                try
-                {
-                    tempFile = System.IO.File.Open(openFileDialog.FileName, System.IO.FileMode.Open, System.IO.FileAccess.ReadWrite);
-                    tempList = (List<ITransport>)_formatter.Deserialize(tempFile);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Could not load file: " + ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
-                if (_file != null)
-                {
-                    _file.Close();
-                }
-                _file = tempFile;
-                // Смещение указателя в начало файла,
-                // чтобы в случае сериализации происходила перезапись
-                _file.Position = 0;
-
-                TransportList.RemoveAll(transport => true);
-                TransportList.AddRange(tempList);
-                _bindingTransportList.ResetBindings(true);
-
-                if (_documentStatus == DocumentStatus.None)
-                {
-                    EnableButtons();
-                }
-                _documentStatus = DocumentStatus.HasFile;
-                DocumentChanged = false;
-                Text = "Transport Browser - " + _file.Name;
+                tempFile = System.IO.File.Open(fileName, System.IO.FileMode.Open, System.IO.FileAccess.ReadWrite);
+                tempList = (List<ITransport>)_formatter.Deserialize(tempFile);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Could not load file: " + ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (_file != null)
+            {
+                _file.Close();
+            }
+            _file = tempFile;
+            // Смещение указателя в начало файла,
+            // чтобы в случае сериализации происходила перезапись
+            _file.Position = 0;
+
+            TransportList.RemoveAll(transport => true);
+            TransportList.AddRange(tempList);
+            _bindingTransportList.ResetBindings(true);
+
+            if (_documentStatus == DocumentStatus.None)
+            {
+                EnableButtons();
+            }
+            _documentStatus = DocumentStatus.HasFile;
+            DocumentChanged = false;
+            Text = "Transport Browser - " + _file.Name;
         }
 
         /// <summary>

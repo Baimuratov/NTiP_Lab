@@ -14,12 +14,17 @@ namespace View
     /// <summary>
     /// Форма поиска объектов в списке TransportList главной формы
     /// </summary>
-    public partial class SearchTransportForm : ValidationForm
+    public partial class SearchTransportForm : Form
     {
         /// <summary>
         /// Форма, содержащая список в котором проводится поиск
         /// </summary>
         private MainForm _parent;
+
+        /// <summary>
+        /// Инкапсулирует метод, оставляющий в тексте только те символы, которые представляют вещественное число
+        /// </summary>
+        private DoubleFilter _filter;
 
         /// <summary>
         /// Возвращает или задаёт список результатов поиска
@@ -70,9 +75,12 @@ namespace View
             InitializeComponent();
             
             _parent = parentForm;
+
             ResultsList = new List<ITransport>();
             _bindingResultsList = new BindingSource(this, "ResultsList");
             _resultsGridView.DataSource = _bindingResultsList;
+
+            _filter = new DoubleFilter();
 
             _specificFuelConsumptionComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             _fuelConsumptionComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -261,7 +269,7 @@ namespace View
         {
             if (_specificFuelConsumptionTextBox.Modified)
             {
-                ValidateText(ref _specificFuelConsumptionTextBox);
+                _filter.FilterText(ref _specificFuelConsumptionTextBox);
             }
         }
 
@@ -276,7 +284,7 @@ namespace View
         {
             if (_fuelConsumptionTextBox.Modified)
             {
-                ValidateText(ref _fuelConsumptionTextBox);
+                _filter.FilterText(ref _fuelConsumptionTextBox);
             }
         }
     }

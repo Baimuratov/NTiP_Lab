@@ -9,16 +9,16 @@ using System.Text.RegularExpressions;
 namespace View
 {
     /// <summary>
-    /// Предоставляет метод проверки текста
+    /// Предоставляет метод, оставляющий в тексте только те символы, которые представляют вещественное число
     /// </summary>
-    public class Validation
+    public class DoubleFilter
     {
         /// <summary>
         /// Изменяет значение свойства Text элемента управления TextBox,
         /// оставляя только символы, которые будут представлять натуральное или дробное число
         /// </summary>
         /// <param name="textBox">передаваемый по ссылке элемент управления TextBox</param>
-        public void ValidateText(ref TextBox textBox)
+        public void FilterText(ref TextBox textBox)
         {
             string text = textBox.Text;
             int cursorPosition = textBox.SelectionStart;

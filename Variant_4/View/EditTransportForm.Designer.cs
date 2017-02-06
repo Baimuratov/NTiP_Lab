@@ -70,10 +70,10 @@
             this.transportControl1.Name = "transportControl1";
             this.transportControl1.Object = null;
             this.transportControl1.ReadOnly = false;
-            this.transportControl1.Size = new System.Drawing.Size(338, 120);
+            this.transportControl1.Size = new System.Drawing.Size(338, 135);
             this.transportControl1.TabIndex = 10;
             // 
-            // AddTransportForm
+            // EditTransportForm
             // 
             this.AcceptButton = this._okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -87,7 +87,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "AddTransportForm";
+            this.Name = "EditTransportForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add new transport";

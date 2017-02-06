@@ -80,7 +80,7 @@
             // 
             // _addButton
             // 
-            this._addButton.Location = new System.Drawing.Point(12, 201);
+            this._addButton.Location = new System.Drawing.Point(12, 194);
             this._addButton.Name = "_addButton";
             this._addButton.Size = new System.Drawing.Size(200, 27);
             this._addButton.TabIndex = 1;
@@ -90,7 +90,7 @@
             // 
             // _removeButton
             // 
-            this._removeButton.Location = new System.Drawing.Point(12, 285);
+            this._removeButton.Location = new System.Drawing.Point(12, 278);
             this._removeButton.Name = "_removeButton";
             this._removeButton.Size = new System.Drawing.Size(200, 27);
             this._removeButton.TabIndex = 2;
@@ -100,7 +100,7 @@
             // 
             // _searchButton
             // 
-            this._searchButton.Location = new System.Drawing.Point(12, 327);
+            this._searchButton.Location = new System.Drawing.Point(12, 320);
             this._searchButton.Name = "_searchButton";
             this._searchButton.Size = new System.Drawing.Size(200, 27);
             this._searchButton.TabIndex = 3;
@@ -197,7 +197,7 @@
             // 
             // _modifyButton
             // 
-            this._modifyButton.Location = new System.Drawing.Point(12, 243);
+            this._modifyButton.Location = new System.Drawing.Point(12, 236);
             this._modifyButton.Name = "_modifyButton";
             this._modifyButton.Size = new System.Drawing.Size(200, 27);
             this._modifyButton.TabIndex = 6;
@@ -207,11 +207,11 @@
             // 
             // transportControl1
             // 
-            this.transportControl1.Location = new System.Drawing.Point(12, 63);
+            this.transportControl1.Location = new System.Drawing.Point(12, 43);
             this.transportControl1.Name = "transportControl1";
             this.transportControl1.Object = null;
             this.transportControl1.ReadOnly = false;
-            this.transportControl1.Size = new System.Drawing.Size(338, 120);
+            this.transportControl1.Size = new System.Drawing.Size(338, 136);
             this.transportControl1.TabIndex = 7;
             // 
             // MainForm

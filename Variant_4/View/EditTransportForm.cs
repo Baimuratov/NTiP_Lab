@@ -24,12 +24,16 @@ namespace View
         /// </summary>
         private MainForm _parent;
 
+        /// <summary>
+        /// 
+        /// </summary>
         private int _transportIndex;
 
         /// <summary>
-        /// Инициализирует новый экземпляр класса View.AddTransportForm
+        /// Инициализирует новый экземпляр класса View.EditTransportForm
         /// </summary>
         /// <param name="parentForm">Форма, содержащая список в который добавляется объект реализующий ITransport</param>
+        /// <param name="transportIndex">Индекс редактируемого объекта в списке главной формы</param>
         public EditTransportForm(MainForm parentForm, int transportIndex)
         {
             InitializeComponent();
@@ -43,51 +47,31 @@ namespace View
         }
 
         /// <summary>
-        /// Добавляет в список главной формы объект выбранного типа с введёнными значениями свойств
+        /// Заносит в список главной формы объект выбранного типа с введёнными значениями свойств
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void _okButton_Click(object sender, EventArgs e)
         {
-            /*ITransport someVehicles;
-            if (_carRadioButton.Checked)
-            {
-                Car auto = new Car();
-                if (!WriteProperty(_droveKilometersTextBox.Text, "Drove kilometers", value => auto.DroveKilometers = value))
-                {
-                    return;
-                }
-                someVehicles = auto;
-            }
-            else
-            {
-                Helicopter heli = new Helicopter();
-                if (!WriteProperty(_hoursInAirTextBox.Text, "Hours in air", value => heli.HoursInAir = value))
-                {
-                    return;
-                }
-                someVehicles = heli;
-            }
-            if (!WriteProperty(_specificFuelConsumptionTextBox.Text, "Specific fuel consumption", value => someVehicles.SpecificFuelConsumption = value))
-            {
-                return;
-            }*/
             Transport transport = transportControl1.Object;
             if (transport == null)
             {
                 return;
             }
+
             if (_transportIndex == _parent.TransportList.Count)
             {
                 _parent.TransportList.Add(transport);
+                _parent.DocumentChanged = true;
             }
             else
             {
-                _parent.TransportList[_transportIndex] = transport;
+                if (_parent.TransportList[_transportIndex] != transport)
+                {
+                    _parent.TransportList[_transportIndex] = transport;
+                    _parent.DocumentChanged = true;
+                }
             }
-            _parent.DocumentChanged = true;
-            // Добавление символа "*" в заголовок главной формы, показывающего что документ был изменён
-            _parent.Text = Regex.Replace(_parent.Text, @".\z", match => match.Value == "*" ? match.Value : match.Value + "*");
             Close();
         }
     }

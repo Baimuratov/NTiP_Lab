@@ -70,10 +70,7 @@
     <Compile Include="TransportControl.Designer.cs">
       <DependentUpon>TransportControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Validation.cs" />
-    <Compile Include="ValidationForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="DoubleFilter.cs" />
     <EmbeddedResource Include="EditTransportForm.resx">
       <DependentUpon>EditTransportForm.cs</DependentUpon>
     </EmbeddedResource>
