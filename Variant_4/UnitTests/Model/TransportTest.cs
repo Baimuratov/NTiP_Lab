@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Model;
-using NUnit.Framework; 
+using NUnit.Framework;
 
 namespace UnitTests.Model
 {
@@ -28,7 +24,7 @@ namespace UnitTests.Model
         [TestCase(double.MinValue, ExpectedException = typeof(ArgumentException), TestName = "Тестирование SpecificFuelConsumption при присваивании минимально допустимого вещественного числа")]
         [TestCase(double.NaN, ExpectedException = typeof(ArgumentException), TestName = "Тестирование SpecificFuelConsumption при присваивании 'Note a number'")]
         [TestCase(double.PositiveInfinity, ExpectedException = typeof(ArgumentException), TestName = "Тестирование SpecificFuelConsumption при присваивании положительного бесконечного значения")]
-        [TestCase(double.NegativeInfinity, ExpectedException = typeof(ArgumentException), TestName = "Тестирование SpecificFuelConsumption при присваивании отрицатльного бесконечного значения")]
+        [TestCase(double.NegativeInfinity, ExpectedException = typeof(ArgumentException), TestName = "Тестирование SpecificFuelConsumption при присваивании отрицательного бесконечного значения")]
         public void SpecificFuelConsumptionTest(double specificFuelConsumption)
         {
             // Transport - абстрактный класс, содержащий реализацию свойства SpecificFuelConsumption.

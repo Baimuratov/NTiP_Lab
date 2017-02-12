@@ -46,6 +46,10 @@
             this._closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this._modifyButton = new System.Windows.Forms.Button();
+            this._transportControl = new View.TransportControl();
+            this._fuelConsumptionTextBox = new System.Windows.Forms.TextBox();
+            this._fuelConsumptionLabel = new System.Windows.Forms.Label();
             this._transportListGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._transportListGridView)).BeginInit();
             this._menuStrip.SuspendLayout();
@@ -53,10 +57,13 @@
             // 
             // _transportListGroupBox
             // 
+            this._transportListGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this._transportListGroupBox.Controls.Add(this._transportListGridView);
-            this._transportListGroupBox.Location = new System.Drawing.Point(12, 27);
+            this._transportListGroupBox.Location = new System.Drawing.Point(356, 27);
             this._transportListGroupBox.Name = "_transportListGroupBox";
-            this._transportListGroupBox.Size = new System.Drawing.Size(487, 265);
+            this._transportListGroupBox.Size = new System.Drawing.Size(439, 461);
             this._transportListGroupBox.TabIndex = 0;
             this._transportListGroupBox.TabStop = false;
             this._transportListGroupBox.Text = "List of transport";
@@ -65,17 +72,19 @@
             // 
             this._transportListGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this._transportListGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this._transportListGridView.Location = new System.Drawing.Point(6, 19);
+            this._transportListGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._transportListGridView.Location = new System.Drawing.Point(3, 16);
             this._transportListGridView.Name = "_transportListGridView";
             this._transportListGridView.ReadOnly = true;
-            this._transportListGridView.Size = new System.Drawing.Size(475, 240);
+            this._transportListGridView.Size = new System.Drawing.Size(433, 442);
             this._transportListGridView.TabIndex = 0;
+            this._transportListGridView.SelectionChanged += new System.EventHandler(this._transportListGridView_SelectionChanged);
             // 
             // _addButton
             // 
-            this._addButton.Location = new System.Drawing.Point(72, 329);
+            this._addButton.Location = new System.Drawing.Point(12, 194);
             this._addButton.Name = "_addButton";
-            this._addButton.Size = new System.Drawing.Size(103, 28);
+            this._addButton.Size = new System.Drawing.Size(200, 27);
             this._addButton.TabIndex = 1;
             this._addButton.Text = "Add Transport";
             this._addButton.UseVisualStyleBackColor = true;
@@ -83,9 +92,9 @@
             // 
             // _removeButton
             // 
-            this._removeButton.Location = new System.Drawing.Point(204, 329);
+            this._removeButton.Location = new System.Drawing.Point(12, 278);
             this._removeButton.Name = "_removeButton";
-            this._removeButton.Size = new System.Drawing.Size(103, 28);
+            this._removeButton.Size = new System.Drawing.Size(200, 27);
             this._removeButton.TabIndex = 2;
             this._removeButton.Text = "Remove Transport";
             this._removeButton.UseVisualStyleBackColor = true;
@@ -93,9 +102,9 @@
             // 
             // _searchButton
             // 
-            this._searchButton.Location = new System.Drawing.Point(336, 329);
+            this._searchButton.Location = new System.Drawing.Point(12, 320);
             this._searchButton.Name = "_searchButton";
-            this._searchButton.Size = new System.Drawing.Size(103, 28);
+            this._searchButton.Size = new System.Drawing.Size(200, 27);
             this._searchButton.TabIndex = 3;
             this._searchButton.Text = "Search";
             this._searchButton.UseVisualStyleBackColor = true;
@@ -107,7 +116,7 @@
             this._fileToolStripMenuItem});
             this._menuStrip.Location = new System.Drawing.Point(0, 0);
             this._menuStrip.Name = "_menuStrip";
-            this._menuStrip.Size = new System.Drawing.Size(511, 24);
+            this._menuStrip.Size = new System.Drawing.Size(807, 24);
             this._menuStrip.TabIndex = 4;
             this._menuStrip.Text = "menuStrip1";
             // 
@@ -188,24 +197,62 @@
             // 
             this.saveFileDialog.Filter = "Transport list files (*.tl)|*.tl";
             // 
+            // _modifyButton
+            // 
+            this._modifyButton.Location = new System.Drawing.Point(12, 236);
+            this._modifyButton.Name = "_modifyButton";
+            this._modifyButton.Size = new System.Drawing.Size(200, 27);
+            this._modifyButton.TabIndex = 6;
+            this._modifyButton.Text = "Modify Transport";
+            this._modifyButton.UseVisualStyleBackColor = true;
+            this._modifyButton.Click += new System.EventHandler(this._modifyButton_Click);
+            // 
+            // _transportControl
+            // 
+            this._transportControl.Location = new System.Drawing.Point(12, 43);
+            this._transportControl.Name = "_transportControl";
+            this._transportControl.Object = null;
+            this._transportControl.ReadOnly = false;
+            this._transportControl.Size = new System.Drawing.Size(338, 136);
+            this._transportControl.TabIndex = 7;
+            // 
+            // _fuelConsumptionTextBox
+            // 
+            this._fuelConsumptionTextBox.Location = new System.Drawing.Point(143, 124);
+            this._fuelConsumptionTextBox.Name = "_fuelConsumptionTextBox";
+            this._fuelConsumptionTextBox.ReadOnly = true;
+            this._fuelConsumptionTextBox.Size = new System.Drawing.Size(100, 20);
+            this._fuelConsumptionTextBox.TabIndex = 8;
+            // 
+            // _fuelConsumptionLabel
+            // 
+            this._fuelConsumptionLabel.AutoSize = true;
+            this._fuelConsumptionLabel.Location = new System.Drawing.Point(9, 127);
+            this._fuelConsumptionLabel.Name = "_fuelConsumptionLabel";
+            this._fuelConsumptionLabel.Size = new System.Drawing.Size(90, 13);
+            this._fuelConsumptionLabel.TabIndex = 9;
+            this._fuelConsumptionLabel.Text = "Fuel consumption";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(511, 370);
+            this.ClientSize = new System.Drawing.Size(807, 500);
+            this.Controls.Add(this._fuelConsumptionLabel);
+            this.Controls.Add(this._fuelConsumptionTextBox);
+            this.Controls.Add(this._transportControl);
+            this.Controls.Add(this._modifyButton);
             this.Controls.Add(this._searchButton);
             this.Controls.Add(this._removeButton);
             this.Controls.Add(this._addButton);
             this.Controls.Add(this._transportListGroupBox);
             this.Controls.Add(this._menuStrip);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this._menuStrip;
-            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Transport Browser";
+            this.Text = "Transport Viewer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this._transportListGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._transportListGridView)).EndInit();
@@ -235,6 +282,10 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.Button _modifyButton;
+        private TransportControl _transportControl;
+        private System.Windows.Forms.TextBox _fuelConsumptionTextBox;
+        private System.Windows.Forms.Label _fuelConsumptionLabel;
     }
 }
 

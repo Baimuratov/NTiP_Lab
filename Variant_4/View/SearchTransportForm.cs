@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Model;
 
@@ -14,7 +8,7 @@ namespace View
     /// <summary>
     /// Форма поиска объектов в списке TransportList главной формы
     /// </summary>
-    public partial class SearchTransportForm : ValidationForm
+    public partial class SearchTransportForm : Form
     {
         /// <summary>
         /// Форма, содержащая список в котором проводится поиск
@@ -70,6 +64,7 @@ namespace View
             InitializeComponent();
             
             _parent = parentForm;
+
             ResultsList = new List<ITransport>();
             _bindingResultsList = new BindingSource(this, "ResultsList");
             _resultsGridView.DataSource = _bindingResultsList;
@@ -124,12 +119,12 @@ namespace View
         }
 
         /// <summary>
-        /// Присваивает переменной типа double значение конвертированного текста,
-        /// обрабатывая возможные исключения формата и переполнения
+        /// Записывает переменную типа double значением передаваемым в текстовом виде. 
+        /// Обрабатывает возможные исключения формата и переполнения
         /// </summary>
         /// <param name="variable">Переменная, которой присваивается значение</param>
         /// <param name="writingValue">Строковое представление присваиваемого значения</param>
-        /// <param name="showingName">Имя переменной отображаемое в окне при возникновении исключений</param>
+        /// <param name="showingName">Имя переменной, отображаемое в окне при возникновении исключений</param>
         /// <returns>true если переменной присвоено значение, иначе false</returns>
         bool WriteDouble(ref double variable, string writingValue, string showingName)
         {
@@ -261,7 +256,7 @@ namespace View
         {
             if (_specificFuelConsumptionTextBox.Modified)
             {
-                ValidateText(ref _specificFuelConsumptionTextBox);
+                DoubleFilter.FilterText(ref _specificFuelConsumptionTextBox);
             }
         }
 
@@ -276,7 +271,7 @@ namespace View
         {
             if (_fuelConsumptionTextBox.Modified)
             {
-                ValidateText(ref _fuelConsumptionTextBox);
+                DoubleFilter.FilterText(ref _fuelConsumptionTextBox);
             }
         }
     }

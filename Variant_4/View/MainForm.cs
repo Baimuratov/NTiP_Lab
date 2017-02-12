@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Model;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -62,7 +56,27 @@ namespace View
         /// <summary>
         /// Показывает был ли изменён документ с момента создания, открытия или сохранения
         /// </summary>
-        public bool DocumentChanged;
+        private bool _documentChanged;
+
+        /// <summary>
+        /// Возвращает или задаёт признак изменённости документа
+        /// </summary>
+        public bool DocumentChanged
+        {
+            set
+            {
+                _documentChanged = value;
+                if (value == true)
+                {
+                    // Добавление в заголовок окна, символа, показывающего что документ был изменён
+                    Text = Regex.Replace(Text, @".\z", match => match.Value == "*" ? match.Value : match.Value + "*");
+                }
+            }
+            get
+            {
+                return _documentChanged;
+            }
+        }
 
         /// <summary>
         /// Используется при сериализации или десериализации списка TransportList
@@ -77,7 +91,8 @@ namespace View
         /// <summary>
         /// Инициализирует новый экземпляр класса View.MainForm
         /// </summary>
-        public MainForm()
+        /// <param name="fileName">Имя файла открываемого в главной форме</param>
+        public MainForm(string fileName)
         {
             InitializeComponent();
 
@@ -86,12 +101,19 @@ namespace View
             _transportListGridView.DataSource = _bindingTransportList;
 
             _documentStatus = DocumentStatus.New;
+            Text += " - New list1";
             _newDocumentIndex = 1;
             DocumentChanged = false;
-            Text += " - New list1";
 
             _formatter = new BinaryFormatter();
             _file = null;
+
+            _transportControl.ReadOnly = true;
+
+            if (fileName != string.Empty)
+            {
+                LoadDocument(fileName);
+            }
         }
 
         /// <summary>
@@ -101,11 +123,27 @@ namespace View
         /// <param name="e"></param>
         private void addButton_Click(object sender, EventArgs e)
         {
-            AddTransportForm addingForm = new AddTransportForm(this);
+            EditTransportForm addingForm = new EditTransportForm(this, TransportList.Count);
+            addingForm.Text = "Add new transport";
             addingForm.ShowDialog();
             _bindingTransportList.ResetBindings(true);
         }
 
+        /// <summary>
+        /// Создаёт и отображает форму изменения объекта в TransportList
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _modifyButton_Click(object sender, EventArgs e)
+        {
+            if (_transportListGridView.CurrentCell != null)
+            {
+                EditTransportForm modifyForm = new EditTransportForm(this, _transportListGridView.CurrentCell.RowIndex);
+                modifyForm.Text = "Modify transport";
+                modifyForm.ShowDialog();
+                _bindingTransportList.ResetBindings(true);
+            }
+        }
 
         /// <summary>
         /// Создаёт и отображает форму поиска объектов в TransportList
@@ -162,8 +200,6 @@ namespace View
             if (remoteObjectsCount > 0)
             {
                 DocumentChanged = true;
-                // Добавление в заголовок окна, символа, показывающего что документ был изменён
-                Text = Regex.Replace(Text, @".\z", match => match.Value == "*" ? match.Value : match.Value + "*");
             }
         }
 
@@ -187,9 +223,9 @@ namespace View
         /// <param name="e"></param>
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (DiscontinueCurrentDocument())
+            if (DiscontinueCurrentDocument() && openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                LoadDocument();
+                LoadDocument(openFileDialog.FileName);
             }
         }
 
@@ -218,19 +254,10 @@ namespace View
             if (_documentStatus == DocumentStatus.HasFile)
             {
                 // Документ принимается за новый, чтобы метод SaveDocument()
-                // отобразил диалоговое окно задания имени сохраняемого файла.
-                // Значение _documentStatus изменится на HasFile
-                // только если будет выполнено сохранение
+                // отобразил диалоговое окно задания имени сохраняемого файла
                 _documentStatus = DocumentStatus.New;
-                
-                // Если сохранение в новый файл не выполнено
-                // (выбрана "отмена" или не удалось создать файл),
-                // то продолжить работу с прежним,
-                // вернуть значение _documentStatus
-                if (!SaveDocument())
-                {
-                    _documentStatus = DocumentStatus.HasFile;
-                }
+                SaveDocument();
+                _documentStatus = DocumentStatus.HasFile;
             }
             else
             {
@@ -255,7 +282,7 @@ namespace View
         /// <summary>
         /// Выводит диалоговое окно, запрашивающее сохранение изменений 
         /// в текущем документе перед его закрытием,
-        /// а также подтверждение закрытия документа.
+        /// а также подтверждение закрытия документа
         /// </summary>
         /// <returns>true - прекратить работу с текущим документом; false - продолжить</returns>
         private bool DiscontinueCurrentDocument()
@@ -290,6 +317,7 @@ namespace View
 
             TransportList.RemoveAll(transport => true);
             _bindingTransportList.ResetBindings(true);
+            _transportControl.Object = null;
 
             if (_documentStatus == DocumentStatus.None)
             {
@@ -298,56 +326,53 @@ namespace View
             _documentStatus = DocumentStatus.New;
             _newDocumentIndex++;
             DocumentChanged = false;
-            Text = "Transport Browser - New list" + Convert.ToString(_newDocumentIndex);
+            Text = "Transport Viewer - New list" + Convert.ToString(_newDocumentIndex);
         }
 
         /// <summary>
         /// Загружает документ из существующего файла
         /// </summary>
-        private void LoadDocument()
+        /// <param name="fileName">Имя загружаемого файла</param>
+        private void LoadDocument(string fileName)
         {
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            FileStream tempFile;
+            List<ITransport> tempList;
+            try
             {
-                FileStream tempFile;
-                List<ITransport> tempList;
-                try
-                {
-                    tempFile = System.IO.File.Open(openFileDialog.FileName, System.IO.FileMode.Open, System.IO.FileAccess.ReadWrite);
-                    tempList = (List<ITransport>)_formatter.Deserialize(tempFile);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Could not load file: " + ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    return;
-                }
-                if (_file != null)
-                {
-                    _file.Close();
-                }
-                _file = tempFile;
-                // Смещение указателя в начало файла,
-                // чтобы в случае сериализации происходила перезапись
-                _file.Position = 0;
-
-                TransportList.RemoveAll(transport => true);
-                TransportList.AddRange(tempList);
-                _bindingTransportList.ResetBindings(true);
-
-                if (_documentStatus == DocumentStatus.None)
-                {
-                    EnableButtons();
-                }
-                _documentStatus = DocumentStatus.HasFile;
-                DocumentChanged = false;
-                Text = "Transport Browser - " + _file.Name;
+                tempFile = File.Open(fileName, FileMode.Open, FileAccess.ReadWrite);
+                tempList = (List<ITransport>)_formatter.Deserialize(tempFile);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Could not load file: " + ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (_file != null)
+            {
+                _file.Close();
+            }
+            _file = tempFile;
+            // Смещение указателя в начало файла,
+            // чтобы в случае сериализации происходила перезапись
+            _file.Position = 0;
+
+            TransportList.RemoveAll(transport => true);
+            TransportList.AddRange(tempList);
+            _bindingTransportList.ResetBindings(true);
+
+            if (_documentStatus == DocumentStatus.None)
+            {
+                EnableButtons();
+            }
+            _documentStatus = DocumentStatus.HasFile;
+            DocumentChanged = false;
+            Text = "Transport Viewer - " + _file.Name;
         }
 
         /// <summary>
         /// Сохраняет документ в существующий или новый файл
         /// </summary>
-        /// <returns>true - если сохранение выполнено, иначе false</returns>
-        private bool SaveDocument()
+        private void SaveDocument()
         {
             if (_documentStatus == DocumentStatus.New)
             {
@@ -356,12 +381,12 @@ namespace View
                     FileStream tempFile;
                     try
                     {
-                        tempFile = System.IO.File.Create(saveFileDialog.FileName);
+                        tempFile = File.Create(saveFileDialog.FileName);
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show("Could not create a file: " + ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return false;
+                        return;
                     }
                     if (_file != null)
                     {
@@ -372,7 +397,7 @@ namespace View
                 }
                 else
                 {
-                    return false;
+                    return;
                 }
             }
             _formatter.Serialize(_file, TransportList);
@@ -380,8 +405,8 @@ namespace View
             // чтобы при повторном сохранении происходила перезапись
             _file.Position = 0;
             DocumentChanged = false;
-            Text = "Transport Browser - " + _file.Name;
-            return true;
+            Text = "Transport Viewer - " + _file.Name;
+            return;
         }
 
         /// <summary>
@@ -396,9 +421,11 @@ namespace View
             }
             TransportList.RemoveAll(transport => true);
             _bindingTransportList.ResetBindings(true);
+            _transportControl.Object = null;
 
             _transportListGridView.Enabled = false;
             _addButton.Enabled = false;
+            _modifyButton.Enabled = false;
             _removeButton.Enabled = false;
             _searchButton.Enabled = false;
             _saveToolStripMenuItem.Enabled = false;
@@ -407,7 +434,7 @@ namespace View
 
             _documentStatus = DocumentStatus.None;
             DocumentChanged = false;
-            Text = "Transport Browser";
+            Text = "Transport Viewer";
         }
 
         /// <summary>
@@ -417,6 +444,7 @@ namespace View
         {
             _transportListGridView.Enabled = true;
             _addButton.Enabled = true;
+            _modifyButton.Enabled = true;
             _removeButton.Enabled = true;
             _searchButton.Enabled = true;
             _saveToolStripMenuItem.Enabled = true;
@@ -435,6 +463,27 @@ namespace View
             if (!DiscontinueCurrentDocument())
             {
                 e.Cancel = true;
+            }
+        }
+
+        /// <summary>
+        /// При изменении выбора объекта в таблице _transportListGridView 
+        /// отображает свойства выбранного объекта 
+        /// в панели _transportControl и текстовом поле _fuelConsumptionTextBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _transportListGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            if (_transportListGridView.CurrentCell == null)
+            {
+                _transportControl.Object = null;
+                _fuelConsumptionTextBox.Text = string.Empty;
+            }
+            else
+            {
+                _transportControl.Object = (Transport)TransportList[_transportListGridView.CurrentCell.RowIndex];
+                _fuelConsumptionTextBox.Text = TransportList[_transportListGridView.CurrentCell.RowIndex].FuelConsumption.ToString();
             }
         }
     }

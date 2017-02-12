@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using System.Text.RegularExpressions;
 
 namespace View
 {
     /// <summary>
-    /// Предназначен для наследования метода проверки текста
+    /// Инкапсулирует метод, оставляющий в тексте только те символы, которые представляют вещественное число
     /// </summary>
-    public partial class ValidationForm : Form
+    public static class DoubleFilter
     {
         /// <summary>
         /// Изменяет значение свойства Text элемента управления TextBox,
         /// оставляя только символы, которые будут представлять натуральное или дробное число
         /// </summary>
         /// <param name="textBox">передаваемый по ссылке элемент управления TextBox</param>
-        public void ValidateText(ref TextBox textBox)
+        public static void FilterText(ref TextBox textBox)
         {
             string text = textBox.Text;
             int cursorPosition = textBox.SelectionStart;
@@ -32,7 +27,7 @@ namespace View
             // Делегат, указывающий на метод, который будет
             // вызываться при каждом обнаружении запятой в тексте.
             // Возвращает заменяющую строку
-            MatchEvaluator myEvaluator = delegate(Match match)
+            MatchEvaluator myEvaluator = delegate (Match match)
             {
                 if (textHasComma == false)
                 {
