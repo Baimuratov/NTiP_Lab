@@ -35,7 +35,6 @@
             this._helicopterRadioButton = new System.Windows.Forms.RadioButton();
             this._carRadioButton = new System.Windows.Forms.RadioButton();
             this._randomDataButton = new System.Windows.Forms.Button();
-            this._fuelConsumptionTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // _hoursInAirTextBox
@@ -68,10 +67,9 @@
             this._propertiesLabel.AutoSize = true;
             this._propertiesLabel.Location = new System.Drawing.Point(-3, 6);
             this._propertiesLabel.Name = "_propertiesLabel";
-            this._propertiesLabel.Size = new System.Drawing.Size(128, 91);
+            this._propertiesLabel.Size = new System.Drawing.Size(128, 65);
             this._propertiesLabel.TabIndex = 14;
-            this._propertiesLabel.Text = "Drove kilometers\r\n\r\nHours in air\r\n\r\nSpecific fuel consumption\r\n\r\nFuel consumption" +
-    "";
+            this._propertiesLabel.Text = "Drove kilometers\r\n\r\nHours in air\r\n\r\nSpecific fuel consumption";
             // 
             // _helicopterRadioButton
             // 
@@ -107,19 +105,10 @@
             this._randomDataButton.UseVisualStyleBackColor = true;
             this._randomDataButton.Click += new System.EventHandler(this._randomDataButton_Click);
             // 
-            // _fuelConsumptionTextBox
-            // 
-            this._fuelConsumptionTextBox.Location = new System.Drawing.Point(131, 81);
-            this._fuelConsumptionTextBox.Name = "_fuelConsumptionTextBox";
-            this._fuelConsumptionTextBox.ReadOnly = true;
-            this._fuelConsumptionTextBox.Size = new System.Drawing.Size(100, 20);
-            this._fuelConsumptionTextBox.TabIndex = 16;
-            // 
             // TransportControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this._fuelConsumptionTextBox);
             this.Controls.Add(this._randomDataButton);
             this.Controls.Add(this._hoursInAirTextBox);
             this.Controls.Add(this._droveKilometersTextBox);
@@ -143,6 +132,5 @@
         private System.Windows.Forms.RadioButton _helicopterRadioButton;
         private System.Windows.Forms.RadioButton _carRadioButton;
         private System.Windows.Forms.Button _randomDataButton;
-        private System.Windows.Forms.TextBox _fuelConsumptionTextBox;
     }
 }

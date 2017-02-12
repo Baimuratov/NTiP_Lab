@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Model;
 
@@ -20,11 +14,6 @@ namespace View
         /// Форма, содержащая список в котором проводится поиск
         /// </summary>
         private MainForm _parent;
-
-        /// <summary>
-        /// Инкапсулирует метод, оставляющий в тексте только те символы, которые представляют вещественное число
-        /// </summary>
-        private DoubleFilter _filter;
 
         /// <summary>
         /// Возвращает или задаёт список результатов поиска
@@ -80,8 +69,6 @@ namespace View
             _bindingResultsList = new BindingSource(this, "ResultsList");
             _resultsGridView.DataSource = _bindingResultsList;
 
-            _filter = new DoubleFilter();
-
             _specificFuelConsumptionComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             _fuelConsumptionComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             _specificFuelConsumptionComboBox.SelectedItem = "=";
@@ -132,12 +119,12 @@ namespace View
         }
 
         /// <summary>
-        /// Присваивает переменной типа double значение конвертированного текста,
-        /// обрабатывая возможные исключения формата и переполнения
+        /// Записывает переменную типа double значением передаваемым в текстовом виде. 
+        /// Обрабатывает возможные исключения формата и переполнения
         /// </summary>
         /// <param name="variable">Переменная, которой присваивается значение</param>
         /// <param name="writingValue">Строковое представление присваиваемого значения</param>
-        /// <param name="showingName">Имя переменной отображаемое в окне при возникновении исключений</param>
+        /// <param name="showingName">Имя переменной, отображаемое в окне при возникновении исключений</param>
         /// <returns>true если переменной присвоено значение, иначе false</returns>
         bool WriteDouble(ref double variable, string writingValue, string showingName)
         {
@@ -269,7 +256,7 @@ namespace View
         {
             if (_specificFuelConsumptionTextBox.Modified)
             {
-                _filter.FilterText(ref _specificFuelConsumptionTextBox);
+                DoubleFilter.FilterText(ref _specificFuelConsumptionTextBox);
             }
         }
 
@@ -284,7 +271,7 @@ namespace View
         {
             if (_fuelConsumptionTextBox.Modified)
             {
-                _filter.FilterText(ref _fuelConsumptionTextBox);
+                DoubleFilter.FilterText(ref _fuelConsumptionTextBox);
             }
         }
     }

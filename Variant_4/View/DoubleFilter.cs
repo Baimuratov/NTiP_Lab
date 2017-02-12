@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using System.Text.RegularExpressions;
 
 namespace View
 {
     /// <summary>
-    /// Предоставляет метод, оставляющий в тексте только те символы, которые представляют вещественное число
+    /// Инкапсулирует метод, оставляющий в тексте только те символы, которые представляют вещественное число
     /// </summary>
-    public class DoubleFilter
+    public static class DoubleFilter
     {
         /// <summary>
         /// Изменяет значение свойства Text элемента управления TextBox,
         /// оставляя только символы, которые будут представлять натуральное или дробное число
         /// </summary>
         /// <param name="textBox">передаваемый по ссылке элемент управления TextBox</param>
-        public void FilterText(ref TextBox textBox)
+        public static void FilterText(ref TextBox textBox)
         {
             string text = textBox.Text;
             int cursorPosition = textBox.SelectionStart;

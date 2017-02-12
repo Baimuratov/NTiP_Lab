@@ -1,38 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Text.RegularExpressions;
 using Model;
-using System.Reflection;
 
 namespace View
 {
     /// <summary>
-    /// Форма добавления объекта реализующего интерфейс ITransport
-    /// в список TransportList главной формы
+    /// Форма редактирования объекта типа Transport, который является 
+    /// или новым объектом добавляемым в список TransportList главной формы, 
+    /// или изменяемым объектом из этого списка
     /// </summary>
     public partial class EditTransportForm : Form
     {
         /// <summary>
-        /// Форма, содержащая список в который добавляется объект реализующий ITransport
+        /// Форма, содержащая список где будет добавлен/изменён объект
         /// </summary>
         private MainForm _parent;
 
         /// <summary>
-        /// 
+        /// Индекс редактируемого объекта в списке главной формы
         /// </summary>
         private int _transportIndex;
 
         /// <summary>
         /// Инициализирует новый экземпляр класса View.EditTransportForm
         /// </summary>
-        /// <param name="parentForm">Форма, содержащая список в который добавляется объект реализующий ITransport</param>
+        /// <param name="parentForm">Форма, содержащая список где будет добавлен/изменён объект типа Transport</param>
         /// <param name="transportIndex">Индекс редактируемого объекта в списке главной формы</param>
         public EditTransportForm(MainForm parentForm, int transportIndex)
         {
@@ -41,9 +33,9 @@ namespace View
             _transportIndex = transportIndex;
             if (_transportIndex < _parent.TransportList.Count)
             {
-                transportControl1.Object = (Transport)_parent.TransportList[_transportIndex];
+                _transportControl.Object = (Transport)_parent.TransportList[_transportIndex];
             }
-            transportControl1.ReadOnly = false;
+            _transportControl.ReadOnly = false;
         }
 
         /// <summary>
@@ -53,12 +45,14 @@ namespace View
         /// <param name="e"></param>
         private void _okButton_Click(object sender, EventArgs e)
         {
-            Transport transport = transportControl1.Object;
+            Transport transport = _transportControl.Object;
+            // transport будет равен null в случае неправильных данных в текстовых полях
             if (transport == null)
             {
                 return;
             }
-
+            // Индекс равный Count - это индекс следующий после индекса последнего элемента,
+            // такое значение подразумевает добавление нового элемента в конец списка
             if (_transportIndex == _parent.TransportList.Count)
             {
                 _parent.TransportList.Add(transport);
@@ -66,6 +60,7 @@ namespace View
             }
             else
             {
+                // Проверка изменённости объекта нужна потому что кнопка "Ok" может быть нажата и при неизменных данных
                 if (_parent.TransportList[_transportIndex] != transport)
                 {
                     _parent.TransportList[_transportIndex] = transport;

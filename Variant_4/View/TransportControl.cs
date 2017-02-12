@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Model;
 
@@ -16,11 +9,6 @@ namespace View
     /// </summary>
     public partial class TransportControl : UserControl
     {
-        /// <summary>
-        /// Инкапсулирует метод, оставляющий в тексте только те символы, которые представляют вещественное число
-        /// </summary>
-        private DoubleFilter _filter;
-        
         /// <summary>
         /// Режим доступа к данным в текстовых полях: 
         /// true - только для чтения, false - разрешено редактирование
@@ -67,7 +55,7 @@ namespace View
                 // Он выполняет проверку данных в текстовых полях с выводом сообщений об ошибках.
                 // Чтобы эти сообщения не появлялись при работе в конструкторе форм,
                 // проверка достижима только если выполняется данный проект
-                if (Application.ProductName != "View")
+                if (Application.ProductName != "Transport Viewer")
                 {
                     return null;
                 }
@@ -154,7 +142,6 @@ namespace View
         public TransportControl()
         {
             InitializeComponent();
-            _filter = new DoubleFilter();
             #if !DEBUG
             _randomDataButton.Visible = false;
             #endif
@@ -173,10 +160,8 @@ namespace View
             {
                 // выполнить фильтрацию текста, оставив только символы
                 // представляющие натуральное или дробное число
-                _filter.FilterText(ref _specificFuelConsumptionTextBox); 
+                DoubleFilter.FilterText(ref _specificFuelConsumptionTextBox); 
             }
-            // Отобразить FuelConsumption рассчитаное по новому значению свойства
-            //CalculateFuelConsumption();
         }
 
         /// <summary>
@@ -189,9 +174,8 @@ namespace View
         {
             if (_droveKilometersTextBox.Modified)
             {
-                _filter.FilterText(ref _droveKilometersTextBox);
+                DoubleFilter.FilterText(ref _droveKilometersTextBox);
             }
-            //CalculateFuelConsumption();
         }
 
         /// <summary>
@@ -204,9 +188,8 @@ namespace View
         {
             if (_hoursInAirTextBox.Modified)
             {
-                _filter.FilterText(ref _hoursInAirTextBox);
+                DoubleFilter.FilterText(ref _hoursInAirTextBox);
             }
-            //CalculateFuelConsumption();
         }
 
         /// <summary>
@@ -229,7 +212,6 @@ namespace View
                     _droveKilometersTextBox.Text = string.Empty;
                 }
             }
-            CalculateFuelConsumption();
         }
 
         /// <summary>
@@ -252,14 +234,14 @@ namespace View
                     _hoursInAirTextBox.Text = string.Empty;
                 }
             }
-            CalculateFuelConsumption();
         }
 
         /// <summary>
-        /// Записывает свойство типа double
+        /// Записывает свойство типа double значением передаваемым в текстовом виде. 
+        /// Обрабатывает возможные исключения формата и переполнения
         /// </summary>
         /// <param name="writingValue">Строковое представление присваиваемого значения</param>
-        /// <param name="propertyName">Имя записываемого свойства</param>
+        /// <param name="propertyName">Имя записываемого свойства, отображается в окне при возникновении исключений</param>
         /// <param name="setFunction">Функция, вызывающая метод доступа set свойства</param>
         /// <returns>true если свойству присвоено значение, иначе false</returns>
         bool WriteProperty(string writingValue, string propertyName, Action<double> setFunction)
@@ -297,48 +279,6 @@ namespace View
             else
             {
                 _hoursInAirTextBox.Text = Convert.ToString(randomData.NextDouble() * 10);
-            }
-        }
-
-
-        /// <summary>
-        /// Отображает в текстовом поле значение свойства FuelConsumption, 
-        /// которое доступно только для чтения и 
-        /// вычисляется на основе свойств задаваемых в данном элементе управления
-        /// </summary>
-        private void CalculateFuelConsumption()
-        {
-            Transport transport;
-            try
-            {
-                if (_carRadioButton.Checked)
-                {
-                    Car auto = new Car();
-                    auto.DroveKilometers = Convert.ToDouble(_droveKilometersTextBox.Text);
-                    transport = auto;
-                }
-                else
-                {
-                    Helicopter heli = new Helicopter();
-                    heli.HoursInAir = Convert.ToDouble(_hoursInAirTextBox.Text);
-                    transport = heli;
-                }
-                transport.SpecificFuelConsumption = Convert.ToDouble(_specificFuelConsumptionTextBox.Text);
-            }
-            catch (Exception)
-            {
-                // Содержащиеся в текстовых полях значения свойств некорректны,
-                // FuelConsumption вычислить по ним невозможно
-                _fuelConsumptionTextBox.Text = string.Empty;
-                return;
-            }
-            try
-            {
-                _fuelConsumptionTextBox.Text = transport.FuelConsumption.ToString();
-            }
-            catch (OverflowException)
-            {
-                _fuelConsumptionTextBox.Text = "overflow";
             }
         }
     }

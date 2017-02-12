@@ -31,7 +31,7 @@
             this._okButton = new System.Windows.Forms.Button();
             this._cancelButton = new System.Windows.Forms.Button();
             this._infoLabel = new System.Windows.Forms.Label();
-            this.transportControl1 = new View.TransportControl();
+            this._transportControl = new View.TransportControl();
             this.SuspendLayout();
             // 
             // _okButton
@@ -64,14 +64,14 @@
             this._infoLabel.TabIndex = 9;
             this._infoLabel.Text = "Values must be positive integer or fractional number of comma-delimited";
             // 
-            // transportControl1
+            // _transportControl
             // 
-            this.transportControl1.Location = new System.Drawing.Point(14, 44);
-            this.transportControl1.Name = "transportControl1";
-            this.transportControl1.Object = null;
-            this.transportControl1.ReadOnly = false;
-            this.transportControl1.Size = new System.Drawing.Size(338, 135);
-            this.transportControl1.TabIndex = 10;
+            this._transportControl.Location = new System.Drawing.Point(14, 44);
+            this._transportControl.Name = "_transportControl";
+            this._transportControl.Object = null;
+            this._transportControl.ReadOnly = false;
+            this._transportControl.Size = new System.Drawing.Size(338, 135);
+            this._transportControl.TabIndex = 10;
             // 
             // EditTransportForm
             // 
@@ -80,7 +80,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this._cancelButton;
             this.ClientSize = new System.Drawing.Size(375, 236);
-            this.Controls.Add(this.transportControl1);
+            this.Controls.Add(this._transportControl);
             this.Controls.Add(this._infoLabel);
             this.Controls.Add(this._cancelButton);
             this.Controls.Add(this._okButton);
@@ -90,7 +90,6 @@
             this.Name = "EditTransportForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Add new transport";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -100,6 +99,6 @@
         private System.Windows.Forms.Button _okButton;
         private System.Windows.Forms.Button _cancelButton;
         private System.Windows.Forms.Label _infoLabel;
-        private TransportControl transportControl1;
+        private TransportControl _transportControl;
     }
 }

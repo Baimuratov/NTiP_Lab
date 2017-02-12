@@ -47,7 +47,9 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this._modifyButton = new System.Windows.Forms.Button();
-            this.transportControl1 = new View.TransportControl();
+            this._transportControl = new View.TransportControl();
+            this._fuelConsumptionTextBox = new System.Windows.Forms.TextBox();
+            this._fuelConsumptionLabel = new System.Windows.Forms.Label();
             this._transportListGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._transportListGridView)).BeginInit();
             this._menuStrip.SuspendLayout();
@@ -205,21 +207,40 @@
             this._modifyButton.UseVisualStyleBackColor = true;
             this._modifyButton.Click += new System.EventHandler(this._modifyButton_Click);
             // 
-            // transportControl1
+            // _transportControl
             // 
-            this.transportControl1.Location = new System.Drawing.Point(12, 43);
-            this.transportControl1.Name = "transportControl1";
-            this.transportControl1.Object = null;
-            this.transportControl1.ReadOnly = false;
-            this.transportControl1.Size = new System.Drawing.Size(338, 136);
-            this.transportControl1.TabIndex = 7;
+            this._transportControl.Location = new System.Drawing.Point(12, 43);
+            this._transportControl.Name = "_transportControl";
+            this._transportControl.Object = null;
+            this._transportControl.ReadOnly = false;
+            this._transportControl.Size = new System.Drawing.Size(338, 136);
+            this._transportControl.TabIndex = 7;
+            // 
+            // _fuelConsumptionTextBox
+            // 
+            this._fuelConsumptionTextBox.Location = new System.Drawing.Point(143, 124);
+            this._fuelConsumptionTextBox.Name = "_fuelConsumptionTextBox";
+            this._fuelConsumptionTextBox.ReadOnly = true;
+            this._fuelConsumptionTextBox.Size = new System.Drawing.Size(100, 20);
+            this._fuelConsumptionTextBox.TabIndex = 8;
+            // 
+            // _fuelConsumptionLabel
+            // 
+            this._fuelConsumptionLabel.AutoSize = true;
+            this._fuelConsumptionLabel.Location = new System.Drawing.Point(9, 127);
+            this._fuelConsumptionLabel.Name = "_fuelConsumptionLabel";
+            this._fuelConsumptionLabel.Size = new System.Drawing.Size(90, 13);
+            this._fuelConsumptionLabel.TabIndex = 9;
+            this._fuelConsumptionLabel.Text = "Fuel consumption";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(807, 500);
-            this.Controls.Add(this.transportControl1);
+            this.Controls.Add(this._fuelConsumptionLabel);
+            this.Controls.Add(this._fuelConsumptionTextBox);
+            this.Controls.Add(this._transportControl);
             this.Controls.Add(this._modifyButton);
             this.Controls.Add(this._searchButton);
             this.Controls.Add(this._removeButton);
@@ -231,7 +252,7 @@
             this.Name = "MainForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Transport Browser";
+            this.Text = "Transport Viewer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this._transportListGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._transportListGridView)).EndInit();
@@ -262,7 +283,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.Button _modifyButton;
-        private TransportControl transportControl1;
+        private TransportControl _transportControl;
+        private System.Windows.Forms.TextBox _fuelConsumptionTextBox;
+        private System.Windows.Forms.Label _fuelConsumptionLabel;
     }
 }
 

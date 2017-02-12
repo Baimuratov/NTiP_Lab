@@ -11,10 +11,6 @@ C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\View\bin\Debug\Cl
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\View\obj\Debug\View.MainForm.resources
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\View\obj\Debug\View.AddTransportForm.resources
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\Variant_4\View\obj\Debug\View.SearchTransportForm.resources
-C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\obj\Debug\View.exe
-C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\obj\Debug\View.pdb
-C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\bin\Debug\View.exe
-C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\bin\Debug\View.pdb
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\bin\Debug\ClassLibrary1.dll
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\bin\Debug\ClassLibrary1.pdb
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\obj\Debug\View.csprojResolveAssemblyReference.cache
@@ -24,3 +20,7 @@ C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\obj
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\obj\Debug\View.csproj.GenerateResource.Cache
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\obj\Debug\View.TransportControl.resources
 C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\obj\Debug\View.EditTransportForm.resources
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\bin\Debug\TransportViewer.exe
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\bin\Debug\TransportViewer.pdb
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\obj\Debug\TransportViewer.exe
+C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\obj\Debug\TransportViewer.pdb

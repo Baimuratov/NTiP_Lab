@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Model;
 
 namespace View
 {
@@ -12,6 +8,7 @@ namespace View
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
+        /// <param name="args">Параметры командной строки</param>
         [STAThread]
         static void Main(string[] args)
         {
