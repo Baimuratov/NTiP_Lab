@@ -41,7 +41,7 @@ namespace View
         /// <summary>
         /// Используется для привязки TransportList к _transportListGridView
         /// </summary>
-        private BindingSource _bindingTransportList;
+        private readonly BindingSource _bindingTransportList;
 
         /// <summary>
         /// Статус документа приложения (данных в TransportList)
@@ -66,7 +66,7 @@ namespace View
             set
             {
                 _documentChanged = value;
-                if (value == true)
+                if (value)
                 {
                     // Добавление в заголовок окна, символа, показывающего что документ был изменён
                     Text = Regex.Replace(Text, @".\z", match => match.Value == "*" ? match.Value : match.Value + "*");
@@ -81,7 +81,7 @@ namespace View
         /// <summary>
         /// Используется при сериализации или десериализации списка TransportList
         /// </summary>
-        private BinaryFormatter _formatter;
+        private readonly BinaryFormatter _formatter;
 
         /// <summary>
         /// Поток связывающий приложение с файлом, в который производится запись документа или его чтение

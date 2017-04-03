@@ -14,12 +14,12 @@ namespace View
         /// <summary>
         /// Форма, содержащая список где будет добавлен/изменён объект
         /// </summary>
-        private MainForm _parent;
+        private readonly MainForm _parent;
 
         /// <summary>
         /// Индекс редактируемого объекта в списке главной формы
         /// </summary>
-        private int _transportIndex;
+        private readonly int _transportIndex;
 
         /// <summary>
         /// Инициализирует новый экземпляр класса View.EditTransportForm

@@ -29,7 +29,7 @@ namespace View
             // Возвращает заменяющую строку
             MatchEvaluator myEvaluator = delegate (Match match)
             {
-                if (textHasComma == false)
+                if (!textHasComma)
                 {
                     textHasComma = true;
                     return ",";
