@@ -108,7 +108,7 @@ namespace View
         {
             set
             {
-                if (value == true)
+                if (value)
                 {
                     _specificFuelConsumptionTextBox.ReadOnly = true;
                     _droveKilometersTextBox.ReadOnly = true;
@@ -207,7 +207,7 @@ namespace View
             else
             {
                 _droveKilometersTextBox.Enabled = false;
-                if (ReadOnly == true)
+                if (ReadOnly)
                 {
                     _droveKilometersTextBox.Text = string.Empty;
                 }
@@ -229,7 +229,7 @@ namespace View
             else
             {
                 _hoursInAirTextBox.Enabled = false;
-                if (ReadOnly == true)
+                if (ReadOnly)
                 {
                     _hoursInAirTextBox.Text = string.Empty;
                 }

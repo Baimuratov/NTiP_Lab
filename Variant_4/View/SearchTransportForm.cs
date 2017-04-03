@@ -13,7 +13,7 @@ namespace View
         /// <summary>
         /// Форма, содержащая список в котором проводится поиск
         /// </summary>
-        private MainForm _parent;
+        private readonly MainForm _parent;
 
         /// <summary>
         /// Возвращает или задаёт список результатов поиска
@@ -23,7 +23,7 @@ namespace View
         /// <summary>
         /// Используется для привязки ResultsList к элементу управления _resultsGridView
         /// </summary>
-        private BindingSource _bindingResultsList;
+        private readonly BindingSource _bindingResultsList;
 
         // Следующие массивы используются при поиске
         // для циклического обращения к свойствам элементов управления
@@ -33,26 +33,26 @@ namespace View
         /// Копирует значения свойств Checked элементов управления CheckBox,
         /// показывает какие свойства были выбраны для поиска
         /// </summary>
-        private bool[] _checkedProperties = new bool[2];
+        private readonly bool[] _checkedProperties = new bool[2];
         
         /// <summary>
         /// Копирует значения свойств SelectedIndex элементов управления ComboBox,
         /// содержит выбранные операции сравнения
         /// </summary>
-        private int[] _searchTerms = new int[2];
+        private readonly int[] _searchTerms = new int[2];
 
         /// <summary>
         /// Содержит конвертированные в double
         /// значения свойств Text элементов управления TextBox,
         /// представляет заданные для поиска значения
         /// </summary>
-        private double[] _searchValues = new double[2];
+        private readonly double[] _searchValues = new double[2];
 
         /// <summary>
         /// Копирует значения свойств объекта, проверяемого на соответствие условиям поиска.
         /// Копируемые свойства являются общими для всех объектов реализующих ITransport
         /// </summary>
-        private double[] _transportProperties = new double[2];
+        private readonly double[] _transportProperties = new double[2];
 
         /// <summary>
         /// Инициализирует новый экземпляр класса View.SearchTransportForm
@@ -207,6 +207,7 @@ namespace View
                 _specificFuelConsumptionComboBox.Enabled = true;
                 _specificFuelConsumptionTextBox.Enabled = true;
                 _searchButton.Enabled = true;
+                _checkedProperties[0] = true;
             }
             else
             {
@@ -216,6 +217,7 @@ namespace View
                 {
                     _searchButton.Enabled = false;
                 }
+                _checkedProperties[0] = false;
             }
         }
 
@@ -233,6 +235,7 @@ namespace View
                 _fuelConsumptionComboBox.Enabled = true;
                 _fuelConsumptionTextBox.Enabled = true;
                 _searchButton.Enabled = true;
+                _checkedProperties[1] = true;
             }
             else
             {
@@ -242,6 +245,7 @@ namespace View
                 {
                     _searchButton.Enabled = false;
                 }
+                _checkedProperties[1] = false;
             }
         }
 

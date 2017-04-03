@@ -54,7 +54,7 @@
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup>
-    <Win32Resource>C:\Users\Admin\Documents\Visual Studio 2013\Projects\NTiP_Lab\Variant_4\View\Icons.res</Win32Resource>
+    <Win32Resource>Icons.res</Win32Resource>
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup />
