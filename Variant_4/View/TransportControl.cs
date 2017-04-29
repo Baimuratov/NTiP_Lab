@@ -202,15 +202,16 @@ namespace View
         {
             if (_carRadioButton.Checked)
             {
-                _droveKilometersTextBox.Enabled = true;
+                _droveKilometersTextBox.Visible = true;
+                _specificPropertiesLabel.Text = "Drove kilometers";
             }
             else
             {
-                _droveKilometersTextBox.Enabled = false;
-                if (ReadOnly)
+                _droveKilometersTextBox.Visible = false;
+                /*if (ReadOnly)
                 {
                     _droveKilometersTextBox.Text = string.Empty;
-                }
+                }*/
             }
         }
 
@@ -224,15 +225,12 @@ namespace View
         {
             if (_helicopterRadioButton.Checked)
             {
-                _hoursInAirTextBox.Enabled = true;
+                _hoursInAirTextBox.Visible = true;
+                _specificPropertiesLabel.Text = "Hours in air";
             }
             else
             {
-                _hoursInAirTextBox.Enabled = false;
-                if (ReadOnly)
-                {
-                    _hoursInAirTextBox.Text = string.Empty;
-                }
+                _hoursInAirTextBox.Visible = false;
             }
         }
 
@@ -271,8 +269,19 @@ namespace View
         private void _randomDataButton_Click(object sender, EventArgs e)
         {
             Random randomData = new Random();
+
+            switch (randomData.Next(2))
+            {
+                case 0:
+                    _carRadioButton.Checked = true;
+                    break;
+                case 1:
+                    _helicopterRadioButton.Checked = true;
+                    break;
+            }
+
             _specificFuelConsumptionTextBox.Text = Convert.ToString(randomData.NextDouble() * 100);
-            if (_droveKilometersTextBox.Enabled)
+            if (_droveKilometersTextBox.Visible)
             {
                 _droveKilometersTextBox.Text = Convert.ToString(randomData.NextDouble() * 100);
             }

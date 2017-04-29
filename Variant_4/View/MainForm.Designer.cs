@@ -82,7 +82,7 @@
             // 
             // _addButton
             // 
-            this._addButton.Location = new System.Drawing.Point(12, 194);
+            this._addButton.Location = new System.Drawing.Point(12, 216);
             this._addButton.Name = "_addButton";
             this._addButton.Size = new System.Drawing.Size(200, 27);
             this._addButton.TabIndex = 1;
@@ -92,7 +92,7 @@
             // 
             // _removeButton
             // 
-            this._removeButton.Location = new System.Drawing.Point(12, 278);
+            this._removeButton.Location = new System.Drawing.Point(12, 300);
             this._removeButton.Name = "_removeButton";
             this._removeButton.Size = new System.Drawing.Size(200, 27);
             this._removeButton.TabIndex = 2;
@@ -102,7 +102,7 @@
             // 
             // _searchButton
             // 
-            this._searchButton.Location = new System.Drawing.Point(12, 320);
+            this._searchButton.Location = new System.Drawing.Point(12, 342);
             this._searchButton.Name = "_searchButton";
             this._searchButton.Size = new System.Drawing.Size(200, 27);
             this._searchButton.TabIndex = 3;
@@ -199,7 +199,7 @@
             // 
             // _modifyButton
             // 
-            this._modifyButton.Location = new System.Drawing.Point(12, 236);
+            this._modifyButton.Location = new System.Drawing.Point(12, 258);
             this._modifyButton.Name = "_modifyButton";
             this._modifyButton.Size = new System.Drawing.Size(200, 27);
             this._modifyButton.TabIndex = 6;
@@ -209,16 +209,16 @@
             // 
             // _transportControl
             // 
-            this._transportControl.Location = new System.Drawing.Point(12, 43);
+            this._transportControl.Location = new System.Drawing.Point(12, 24);
             this._transportControl.Name = "_transportControl";
             this._transportControl.Object = null;
             this._transportControl.ReadOnly = false;
-            this._transportControl.Size = new System.Drawing.Size(338, 136);
+            this._transportControl.Size = new System.Drawing.Size(338, 186);
             this._transportControl.TabIndex = 7;
             // 
             // _fuelConsumptionTextBox
             // 
-            this._fuelConsumptionTextBox.Location = new System.Drawing.Point(143, 124);
+            this._fuelConsumptionTextBox.Location = new System.Drawing.Point(154, 147);
             this._fuelConsumptionTextBox.Name = "_fuelConsumptionTextBox";
             this._fuelConsumptionTextBox.ReadOnly = true;
             this._fuelConsumptionTextBox.Size = new System.Drawing.Size(100, 20);
@@ -227,7 +227,7 @@
             // _fuelConsumptionLabel
             // 
             this._fuelConsumptionLabel.AutoSize = true;
-            this._fuelConsumptionLabel.Location = new System.Drawing.Point(9, 127);
+            this._fuelConsumptionLabel.Location = new System.Drawing.Point(20, 150);
             this._fuelConsumptionLabel.Name = "_fuelConsumptionLabel";
             this._fuelConsumptionLabel.Size = new System.Drawing.Size(90, 13);
             this._fuelConsumptionLabel.TabIndex = 9;
@@ -238,6 +238,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(807, 500);
+            this.Controls.Add(this._menuStrip);
             this.Controls.Add(this._fuelConsumptionLabel);
             this.Controls.Add(this._fuelConsumptionTextBox);
             this.Controls.Add(this._transportControl);
@@ -246,7 +247,6 @@
             this.Controls.Add(this._removeButton);
             this.Controls.Add(this._addButton);
             this.Controls.Add(this._transportListGroupBox);
-            this.Controls.Add(this._menuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this._menuStrip;
             this.Name = "MainForm";
