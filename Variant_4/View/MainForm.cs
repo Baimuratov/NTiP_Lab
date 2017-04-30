@@ -293,7 +293,7 @@ namespace View
                     documentName = _file.Name;
                 }
 
-                switch (MessageBox.Show(string.Format("Save changes in {0}?", documentName), "", MessageBoxButtons.YesNoCancel))
+                switch (MessageBox.Show("Save changes in " + documentName + "?", "", MessageBoxButtons.YesNoCancel))
                 {
                     case DialogResult.Yes:
                         SaveDocument();
@@ -491,6 +491,16 @@ namespace View
                 _transportControl.Object = (Transport)TransportList[_transportListGridView.CurrentCell.RowIndex];
                 _fuelConsumptionTextBox.Text = TransportList[_transportListGridView.CurrentCell.RowIndex].FuelConsumption.ToString();
             }
+        }
+
+        /// <summary>
+        /// Завершает работу приложения при нажатии кнопки "Exit" в меню "File"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

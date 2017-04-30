@@ -37,7 +37,7 @@
             // _okButton
             // 
             this._okButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this._okButton.Location = new System.Drawing.Point(92, 229);
+            this._okButton.Location = new System.Drawing.Point(92, 165);
             this._okButton.Name = "_okButton";
             this._okButton.Size = new System.Drawing.Size(75, 25);
             this._okButton.TabIndex = 6;
@@ -49,7 +49,7 @@
             // 
             this._cancelButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this._cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this._cancelButton.Location = new System.Drawing.Point(210, 229);
+            this._cancelButton.Location = new System.Drawing.Point(210, 165);
             this._cancelButton.Name = "_cancelButton";
             this._cancelButton.Size = new System.Drawing.Size(75, 25);
             this._cancelButton.TabIndex = 7;
@@ -72,7 +72,7 @@
             this._transportControl.Name = "_transportControl";
             this._transportControl.Object = null;
             this._transportControl.ReadOnly = false;
-            this._transportControl.Size = new System.Drawing.Size(338, 183);
+            this._transportControl.Size = new System.Drawing.Size(338, 115);
             this._transportControl.TabIndex = 10;
             // 
             // EditTransportForm
@@ -81,7 +81,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this._cancelButton;
-            this.ClientSize = new System.Drawing.Size(375, 266);
+            this.ClientSize = new System.Drawing.Size(375, 202);
             this.Controls.Add(this._transportControl);
             this.Controls.Add(this._infoLabel);
             this.Controls.Add(this._cancelButton);
