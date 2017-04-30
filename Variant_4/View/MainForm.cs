@@ -79,11 +79,6 @@ namespace View
         }
 
         /// <summary>
-        /// Используется при сериализации или десериализации списка TransportList
-        /// </summary>
-        private readonly BinaryFormatter _formatter;
-
-        /// <summary>
         /// Поток связывающий приложение с файлом, в который производится запись документа или его чтение
         /// </summary>
         private FileStream _file;
@@ -105,7 +100,6 @@ namespace View
             _newDocumentIndex = 1;
             DocumentChanged = false;
 
-            _formatter = new BinaryFormatter();
             _file = null;
 
             _transportControl.ReadOnly = true;
@@ -289,8 +283,17 @@ namespace View
         {
             if (DocumentChanged)
             {
-                switch (MessageBox.Show(string.Format("Save changes in {0}?", _documentStatus == DocumentStatus.New ? "New List" + Convert.ToString(_newDocumentIndex) : _file.Name), 
-                    "", MessageBoxButtons.YesNoCancel))
+                string documentName;
+                if (_documentStatus == DocumentStatus.New)
+                {
+                    documentName = "New List" + _newDocumentIndex.ToString();
+                }
+                else
+                {
+                    documentName = _file.Name;
+                }
+
+                switch (MessageBox.Show("Save changes in " + documentName + "?", "", MessageBoxButtons.YesNoCancel))
                 {
                     case DialogResult.Yes:
                         SaveDocument();
@@ -335,12 +338,13 @@ namespace View
         /// <param name="fileName">Имя загружаемого файла</param>
         private void LoadDocument(string fileName)
         {
+            BinaryFormatter formatter = new BinaryFormatter();
             FileStream tempFile;
             List<ITransport> tempList;
             try
             {
                 tempFile = File.Open(fileName, FileMode.Open, FileAccess.ReadWrite);
-                tempList = (List<ITransport>)_formatter.Deserialize(tempFile);
+                tempList = (List<ITransport>)formatter.Deserialize(tempFile);
             }
             catch (Exception ex)
             {
@@ -374,6 +378,8 @@ namespace View
         /// </summary>
         private void SaveDocument()
         {
+            BinaryFormatter formatter = new BinaryFormatter();
+
             if (_documentStatus == DocumentStatus.New)
             {
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
@@ -400,7 +406,7 @@ namespace View
                     return;
                 }
             }
-            _formatter.Serialize(_file, TransportList);
+            formatter.Serialize(_file, TransportList);
             // Смещение указателя в начало файла,
             // чтобы при повторном сохранении происходила перезапись
             _file.Position = 0;
@@ -485,6 +491,16 @@ namespace View
                 _transportControl.Object = (Transport)TransportList[_transportListGridView.CurrentCell.RowIndex];
                 _fuelConsumptionTextBox.Text = TransportList[_transportListGridView.CurrentCell.RowIndex].FuelConsumption.ToString();
             }
+        }
+
+        /// <summary>
+        /// Завершает работу приложения при нажатии кнопки "Exit" в меню "File"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

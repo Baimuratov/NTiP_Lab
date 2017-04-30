@@ -44,6 +44,7 @@
             this._saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this._closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this._modifyButton = new System.Windows.Forms.Button();
@@ -82,7 +83,7 @@
             // 
             // _addButton
             // 
-            this._addButton.Location = new System.Drawing.Point(12, 194);
+            this._addButton.Location = new System.Drawing.Point(12, 216);
             this._addButton.Name = "_addButton";
             this._addButton.Size = new System.Drawing.Size(200, 27);
             this._addButton.TabIndex = 1;
@@ -92,7 +93,7 @@
             // 
             // _removeButton
             // 
-            this._removeButton.Location = new System.Drawing.Point(12, 278);
+            this._removeButton.Location = new System.Drawing.Point(12, 300);
             this._removeButton.Name = "_removeButton";
             this._removeButton.Size = new System.Drawing.Size(200, 27);
             this._removeButton.TabIndex = 2;
@@ -102,7 +103,7 @@
             // 
             // _searchButton
             // 
-            this._searchButton.Location = new System.Drawing.Point(12, 320);
+            this._searchButton.Location = new System.Drawing.Point(12, 342);
             this._searchButton.Name = "_searchButton";
             this._searchButton.Size = new System.Drawing.Size(200, 27);
             this._searchButton.TabIndex = 3;
@@ -130,7 +131,8 @@
             this._saveToolStripMenuItem,
             this._saveAsToolStripMenuItem,
             this.toolStripSeparator3,
-            this._closeToolStripMenuItem});
+            this._closeToolStripMenuItem,
+            this._exitToolStripMenuItem});
             this._fileToolStripMenuItem.Name = "_fileToolStripMenuItem";
             this._fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this._fileToolStripMenuItem.Text = "File";
@@ -139,7 +141,7 @@
             // 
             this._newToolStripMenuItem.Name = "_newToolStripMenuItem";
             this._newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this._newToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this._newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this._newToolStripMenuItem.Text = "New";
             this._newToolStripMenuItem.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             this._newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
@@ -147,47 +149,54 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // _openToolStripMenuItem
             // 
             this._openToolStripMenuItem.Name = "_openToolStripMenuItem";
             this._openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this._openToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this._openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this._openToolStripMenuItem.Text = "Open";
             this._openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // _saveToolStripMenuItem
             // 
             this._saveToolStripMenuItem.Name = "_saveToolStripMenuItem";
             this._saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this._saveToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this._saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this._saveToolStripMenuItem.Text = "Save";
             this._saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // _saveAsToolStripMenuItem
             // 
             this._saveAsToolStripMenuItem.Name = "_saveAsToolStripMenuItem";
-            this._saveAsToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this._saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this._saveAsToolStripMenuItem.Text = "Save as";
             this._saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // _closeToolStripMenuItem
             // 
             this._closeToolStripMenuItem.Name = "_closeToolStripMenuItem";
-            this._closeToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this._closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this._closeToolStripMenuItem.Text = "Close";
             this._closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
+            // 
+            // _exitToolStripMenuItem
+            // 
+            this._exitToolStripMenuItem.Name = "_exitToolStripMenuItem";
+            this._exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this._exitToolStripMenuItem.Text = "Exit";
+            this._exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // openFileDialog
             // 
@@ -199,7 +208,7 @@
             // 
             // _modifyButton
             // 
-            this._modifyButton.Location = new System.Drawing.Point(12, 236);
+            this._modifyButton.Location = new System.Drawing.Point(12, 258);
             this._modifyButton.Name = "_modifyButton";
             this._modifyButton.Size = new System.Drawing.Size(200, 27);
             this._modifyButton.TabIndex = 6;
@@ -209,16 +218,16 @@
             // 
             // _transportControl
             // 
-            this._transportControl.Location = new System.Drawing.Point(12, 43);
+            this._transportControl.Location = new System.Drawing.Point(12, 24);
             this._transportControl.Name = "_transportControl";
             this._transportControl.Object = null;
             this._transportControl.ReadOnly = false;
-            this._transportControl.Size = new System.Drawing.Size(338, 136);
+            this._transportControl.Size = new System.Drawing.Size(338, 85);
             this._transportControl.TabIndex = 7;
             // 
             // _fuelConsumptionTextBox
             // 
-            this._fuelConsumptionTextBox.Location = new System.Drawing.Point(143, 124);
+            this._fuelConsumptionTextBox.Location = new System.Drawing.Point(149, 115);
             this._fuelConsumptionTextBox.Name = "_fuelConsumptionTextBox";
             this._fuelConsumptionTextBox.ReadOnly = true;
             this._fuelConsumptionTextBox.Size = new System.Drawing.Size(100, 20);
@@ -227,7 +236,7 @@
             // _fuelConsumptionLabel
             // 
             this._fuelConsumptionLabel.AutoSize = true;
-            this._fuelConsumptionLabel.Location = new System.Drawing.Point(9, 127);
+            this._fuelConsumptionLabel.Location = new System.Drawing.Point(15, 118);
             this._fuelConsumptionLabel.Name = "_fuelConsumptionLabel";
             this._fuelConsumptionLabel.Size = new System.Drawing.Size(90, 13);
             this._fuelConsumptionLabel.TabIndex = 9;
@@ -238,6 +247,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(807, 500);
+            this.Controls.Add(this._menuStrip);
             this.Controls.Add(this._fuelConsumptionLabel);
             this.Controls.Add(this._fuelConsumptionTextBox);
             this.Controls.Add(this._transportControl);
@@ -246,7 +256,6 @@
             this.Controls.Add(this._removeButton);
             this.Controls.Add(this._addButton);
             this.Controls.Add(this._transportListGroupBox);
-            this.Controls.Add(this._menuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this._menuStrip;
             this.Name = "MainForm";
@@ -286,6 +295,7 @@
         private TransportControl _transportControl;
         private System.Windows.Forms.TextBox _fuelConsumptionTextBox;
         private System.Windows.Forms.Label _fuelConsumptionLabel;
+        private System.Windows.Forms.ToolStripMenuItem _exitToolStripMenuItem;
     }
 }
 
