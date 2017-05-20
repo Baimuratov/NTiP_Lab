@@ -11,14 +11,14 @@ namespace View
     public partial class SearchTransportForm : Form
     {
         /// <summary>
-        /// Форма, содержащая список в котором проводится поиск
+        /// Список объектов типа Transport, в котором выполняется поиск
         /// </summary>
-        private readonly MainForm _parent;
+        private readonly List<ITransport> _transportList;
 
         /// <summary>
-        /// Возвращает или задаёт список результатов поиска
+        /// Список результатов поиска
         /// </summary>
-        public List<ITransport> ResultsList { set; get; }
+        private readonly List<ITransport> _resultsList;
 
         /// <summary>
         /// Используется для привязки ResultsList к элементу управления _resultsGridView
@@ -57,16 +57,16 @@ namespace View
         /// <summary>
         /// Инициализирует новый экземпляр класса View.SearchTransportForm
         /// </summary>
-        /// <param name="parentForm">Форма, содержащая список 
-        /// объектов реализующих ITransport, в котором проводится поиск</param>
-        public SearchTransportForm(MainForm parentForm)
+        /// <param name="transportList">Список объектов реализующих ITransport, в котором проводится поиск</param>
+        public SearchTransportForm(List<ITransport> transportList)
         {
             InitializeComponent();
-            
-            _parent = parentForm;
 
-            ResultsList = new List<ITransport>();
-            _bindingResultsList = new BindingSource(this, "ResultsList");
+            _transportList = transportList;
+
+            _resultsList = new List<ITransport>();
+            _bindingResultsList = new BindingSource();
+            _bindingResultsList.DataSource = _resultsList;
             _resultsGridView.DataSource = _bindingResultsList;
 
             _specificFuelConsumptionComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -104,11 +104,11 @@ namespace View
             _searchTerms[0] = _specificFuelConsumptionComboBox.SelectedIndex;
             _searchTerms[1] = _fuelConsumptionComboBox.SelectedIndex;
 
-            ResultsList.RemoveAll(transport => true);
-            ResultsList.AddRange(_parent.TransportList.FindAll(Select));
+            _resultsList.RemoveAll(transport => true);
+            _resultsList.AddRange(_transportList.FindAll(Select));
             _bindingResultsList.ResetBindings(true);
 
-            if (ResultsList.Count == 0)
+            if (_resultsList.Count == 0)
             {
                 _notFoundLabel.Visible = true;
             }

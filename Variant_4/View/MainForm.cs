@@ -33,10 +33,10 @@ namespace View
     public partial class MainForm : Form
     {
         /// <summary>
-        /// Возвращает или задаёт список объектов реализующих интерфейс ITransport.
+        /// Список объектов реализующих интерфейс ITransport.
         /// Данный список отображается элементом управления _transportListGridView
         /// </summary>
-        public List<ITransport> TransportList { set; get; }
+        private readonly List<ITransport> _transportList;
 
         /// <summary>
         /// Используется для привязки TransportList к _transportListGridView
@@ -91,8 +91,9 @@ namespace View
         {
             InitializeComponent();
 
-            TransportList = new List<ITransport>();
-            _bindingTransportList = new BindingSource(this, "TransportList");
+            _transportList = new List<ITransport>();
+            _bindingTransportList = new BindingSource();
+            _bindingTransportList.DataSource = _transportList;
             _transportListGridView.DataSource = _bindingTransportList;
 
             _documentStatus = DocumentStatus.New;
@@ -117,10 +118,14 @@ namespace View
         /// <param name="e"></param>
         private void addButton_Click(object sender, EventArgs e)
         {
-            EditTransportForm addingForm = new EditTransportForm(this, TransportList.Count);
+            EditTransportForm addingForm = new EditTransportForm(_transportList, _transportList.Count);
             addingForm.Text = "Add new transport";
             addingForm.ShowDialog();
-            _bindingTransportList.ResetBindings(true);
+            if (addingForm.TransportListChanged)
+            {
+                DocumentChanged = true;
+                _bindingTransportList.ResetBindings(true);
+            }
         }
 
         /// <summary>
@@ -132,10 +137,14 @@ namespace View
         {
             if (_transportListGridView.CurrentCell != null)
             {
-                EditTransportForm modifyForm = new EditTransportForm(this, _transportListGridView.CurrentCell.RowIndex);
+                EditTransportForm modifyForm = new EditTransportForm(_transportList, _transportListGridView.CurrentCell.RowIndex);
                 modifyForm.Text = "Modify transport";
                 modifyForm.ShowDialog();
-                _bindingTransportList.ResetBindings(true);
+                if (modifyForm.TransportListChanged)
+                {
+                    DocumentChanged = true;
+                    _bindingTransportList.ResetBindings(true);
+                }
             }
         }
 
@@ -146,7 +155,7 @@ namespace View
         /// <param name="e"></param>
         private void searchButton_Click(object sender, EventArgs e)
         {
-            SearchTransportForm searchForm = new SearchTransportForm(this);
+            SearchTransportForm searchForm = new SearchTransportForm(_transportList);
             searchForm.ShowDialog();
         }
 
@@ -157,7 +166,7 @@ namespace View
         /// <param name="e"></param>
         private void removeButton_Click(object sender, EventArgs e)
         {
-            if (TransportList.Count == 0)
+            if (_transportList.Count == 0)
             {
                 return;
             }
@@ -187,9 +196,9 @@ namespace View
 
             foreach (DataGridViewCell cell in newCells)
             {
-                TransportList[cell.RowIndex] = null;
+                _transportList[cell.RowIndex] = null;
             }
-            int remoteObjectsCount = TransportList.RemoveAll(transport => transport == null);
+            int remoteObjectsCount = _transportList.RemoveAll(transport => transport == null);
             _bindingTransportList.ResetBindings(true);
             if (remoteObjectsCount > 0)
             {
@@ -318,7 +327,7 @@ namespace View
                 _file = null;
             }
 
-            TransportList.RemoveAll(transport => true);
+            _transportList.RemoveAll(transport => true);
             _bindingTransportList.ResetBindings(true);
             _transportControl.Object = null;
 
@@ -360,8 +369,8 @@ namespace View
             // чтобы в случае сериализации происходила перезапись
             _file.Position = 0;
 
-            TransportList.RemoveAll(transport => true);
-            TransportList.AddRange(tempList);
+            _transportList.RemoveAll(transport => true);
+            _transportList.AddRange(tempList);
             _bindingTransportList.ResetBindings(true);
 
             if (_documentStatus == DocumentStatus.None)
@@ -406,7 +415,7 @@ namespace View
                     return;
                 }
             }
-            formatter.Serialize(_file, TransportList);
+            formatter.Serialize(_file, _transportList);
             // Смещение указателя в начало файла,
             // чтобы при повторном сохранении происходила перезапись
             _file.Position = 0;
@@ -425,7 +434,7 @@ namespace View
                 _file.Close();
                 _file = null;
             }
-            TransportList.RemoveAll(transport => true);
+            _transportList.RemoveAll(transport => true);
             _bindingTransportList.ResetBindings(true);
             _transportControl.Object = null;
 
@@ -488,8 +497,8 @@ namespace View
             }
             else
             {
-                _transportControl.Object = (Transport)TransportList[_transportListGridView.CurrentCell.RowIndex];
-                _fuelConsumptionTextBox.Text = TransportList[_transportListGridView.CurrentCell.RowIndex].FuelConsumption.ToString();
+                _transportControl.Object = (Transport)_transportList[_transportListGridView.CurrentCell.RowIndex];
+                _fuelConsumptionTextBox.Text = _transportList[_transportListGridView.CurrentCell.RowIndex].FuelConsumption.ToString();
             }
         }
 

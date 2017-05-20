@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
 using Model;
 
 namespace View
@@ -12,9 +13,9 @@ namespace View
     public partial class EditTransportForm : Form
     {
         /// <summary>
-        /// Форма, содержащая список где будет добавлен/изменён объект
+        /// Список объектов типа Transport, в котором изменяется или добавляется объект
         /// </summary>
-        private readonly MainForm _parent;
+        private readonly List<ITransport> _transportList;
 
         /// <summary>
         /// Индекс редактируемого объекта в списке главной формы
@@ -22,24 +23,31 @@ namespace View
         private readonly int _transportIndex;
 
         /// <summary>
+        /// Возвращает или задаёт признак изменённости списка объектов типа Transport
+        /// </summary>
+        public bool TransportListChanged { set; get; }
+
+        /// <summary>
         /// Инициализирует новый экземпляр класса View.EditTransportForm
         /// </summary>
-        /// <param name="parentForm">Форма, содержащая список где будет добавлен/изменён объект типа Transport</param>
-        /// <param name="transportIndex">Индекс редактируемого объекта в списке главной формы</param>
-        public EditTransportForm(MainForm parentForm, int transportIndex)
+        /// <param name="transportList">Cписок где будет добавлен/изменён объект типа Transport</param>
+        /// <param name="transportIndex">Индекс редактируемого объекта в списке</param>
+        public EditTransportForm(List<ITransport> transportList, int transportIndex)
         {
             InitializeComponent();
-            _parent = parentForm;
+
+            TransportListChanged = false;
+            _transportList = transportList;
             _transportIndex = transportIndex;
-            if (_transportIndex < _parent.TransportList.Count)
+            if (_transportIndex < _transportList.Count)
             {
-                _transportControl.Object = (Transport)_parent.TransportList[_transportIndex];
+                _transportControl.Object = (Transport)_transportList[_transportIndex];
             }
             _transportControl.ReadOnly = false;
         }
 
         /// <summary>
-        /// Заносит в список главной формы объект выбранного типа с введёнными значениями свойств
+        /// Заносит в список объект выбранного типа с введёнными значениями свойств
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -53,18 +61,18 @@ namespace View
             }
             // Индекс равный Count - это индекс следующий после индекса последнего элемента,
             // такое значение подразумевает добавление нового элемента в конец списка
-            if (_transportIndex == _parent.TransportList.Count)
+            if (_transportIndex == _transportList.Count)
             {
-                _parent.TransportList.Add(transport);
-                _parent.DocumentChanged = true;
+                _transportList.Add(transport);
+                TransportListChanged = true;
             }
             else
             {
                 // Проверка изменённости объекта нужна потому что кнопка "Ok" может быть нажата и при неизменных данных
-                if (_parent.TransportList[_transportIndex] != transport)
+                if (_transportList[_transportIndex] != transport)
                 {
-                    _parent.TransportList[_transportIndex] = transport;
-                    _parent.DocumentChanged = true;
+                    _transportList[_transportIndex] = transport;
+                    TransportListChanged = true;
                 }
             }
             Close();
